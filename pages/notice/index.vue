@@ -13,7 +13,7 @@
         </template>
         <template v-else>
           <section>
-            <ul class="border-top border-black">
+            <!-- <ul class="border-top border-black">
               <li
                 v-for="(item, i) in items"
                 :key="i"
@@ -50,7 +50,8 @@
                   </div>
                 </b-collapse>
               </li>
-            </ul>
+            </ul> -->
+            <pending-text />
           </section>
         </template>
       </template>

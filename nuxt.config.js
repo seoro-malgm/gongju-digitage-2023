@@ -152,7 +152,9 @@ export default {
     { src: "~/plugins/firebase.js" },
     { src: "~/plugins/carousel.js", mode: "client" },
     { src: "~/plugins/intersectionObserver.client.js", mode: "client" },
+    { src: "~/plugins/googleMaps.js", mode: "client" },
   ],
+  transpile: [/^vue2-google-maps($|\/)/],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,

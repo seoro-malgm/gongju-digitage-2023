@@ -20,10 +20,10 @@
             class="letter text-24 text-md-32 text-xl-40 mb-n1 text-black-han text-left lh-100"
           >
             디지털 유산전 2023
-            <br class="d-block d-xl-none" />
+            <!-- <br class="d-block d-xl-none" />
             <span class="text-16 text-md-32 text-xl-40">
               : DIVE into DIGITAL HERITAGE
-            </span>
+            </span> -->
           </div>
         </router-link>
       </b-navbar-brand>
@@ -213,7 +213,7 @@ export default {
           &.router-link-active,
           &:hover {
             font-weight: 700;
-            background-color: $black;
+            background-color: $primary;
             color: white;
           }
         }

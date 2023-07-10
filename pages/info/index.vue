@@ -1,6 +1,9 @@
 <template>
   <div>
-    <marquee-text text="DIVE into DIGITAL HERITAGE" />
+    <marquee-text
+      text="DIVE into DIGITAL HERITAGE"
+      :variant="intros[introIndex]?.variant"
+    />
     <!-- 관람 안내 -->
     <section class="section-gap my-0 pb-2 border-black">
       <!-- <header-underbar title="관람 안내" id="관람_안내" variant="sub-2" /> -->
@@ -15,14 +18,20 @@
             :loop="true"
             :autoplayHoverPause="false"
             :autoplayTimeout="3000"
-            :paginationActiveColor="intros[introIndex]?.variant"
+            :paginationActiveColor="intros[introIndex]?.color"
             v-model="introIndex"
           >
             <slide
               v-for="(item, i) in intros"
               :key="i"
               class="bg-img ratio-sm-160 ratio-45"
-              :style="{ minHeight: '80vh', backgroundColor: `${item.variant}` }"
+              :style="{
+                minHeight: '80vh',
+                backgroundImage: `url(${require(`@/assets/images/info_${i}.png`)})`,
+                backgroundColor: 'black',
+                backgroundAttachment: 'fixed',
+                backgroundRepeat: 'no-repeat',
+              }"
             >
               <article class="intro-article">
                 <b-row align-h="end">
@@ -45,7 +54,11 @@
         </client-only>
       </div>
     </section>
-    <marquee-text text="DIVE into DIGITAL HERITAGE" class="mt-1" />
+    <marquee-text
+      text="DIVE into DIGITAL HERITAGE"
+      class="mt-1"
+      :variant="intros[introIndex]?.variant"
+    />
 
     <!-- !관람 안내 -->
     <!-- 일정 안내 -->
@@ -96,7 +109,7 @@
           />
           <client-only>
             <section class="p-3 border-bottom calendar-wrap" ref="calendar">
-              <ul class="list-calendar">
+              <!-- <ul class="list-calendar">
                 <li
                   class="calendar-item"
                   v-for="(item, i) in calendar"
@@ -111,7 +124,8 @@
                     {{ item.title }}
                   </span>
                 </li>
-              </ul>
+              </ul> -->
+              <pending-text />
             </section>
           </client-only>
         </b-col>
@@ -161,7 +175,7 @@
         </b-col>
         <b-col cols="10" lg="11" class="p-0 border-black border-collapse">
           <div class="p-3 p-md-5 position-relative">
-            <transition name="floor-change" mode="out-in">
+            <!-- <transition name="floor-change" mode="out-in">
               <div
                 v-for="(item, i) in maps"
                 :key="i"
@@ -204,7 +218,10 @@
                   </div>
                 </template>
               </div>
-            </transition>
+            </transition> -->
+            <div :style="{ minHeight: '50vh' }">
+              <pending-text />
+            </div>
           </div>
         </b-col>
       </b-row>
@@ -246,22 +263,26 @@ export default {
       introIndex: 0,
       intros: [
         {
-          variant: "#11997c",
+          variant: "primary",
+          color: "#11997c",
           title: "산업",
           desc: "제4차 산업혁명과 팬데믹 상황은 문화유산의 보존과 활용에 있어 디지털 기술의 개입이 매우 중요함을 보여줬습니다. 물리적으로 만나는 문화유산을 넘어 이제는 다양한 첨단 기술을 통해 디지털 환경에서 만나는 문화유산도 우리에게 소중한 보존과 활용 가치를 전해주고 있습니다. 3차원 스캐너 및 프린터 등의 디바이스, 빅데이터와 AI 기술을 이용한 솔루션, 가상·증강현실과 메타버스 등의 콘텐츠를 통해 문화유산의 새로운 가치를 느껴보시기 바랍니다.",
         },
         {
-          variant: "#9b7455",
+          variant: "secondary",
+          color: "#9b7455",
           title: "연구개발",
           desc: "제4차 산업혁명 시대를 살아가는 지금, 문화유산 보존과 활용의 뉴패러다임은 디지털 연구개발에 있습니다. 다수의 기관과 대학들은 문화유산의 기록, 분석, 진단, 모니터링, 복원, 복제, 플랫폼, 빅데이터, AI 솔루션, 콘텐츠 기획·제작 등 다양한 연구를 진행하고 있습니다. 매년 관련 연구자들이 증가하고 있고, 다수의 기관에서 디지털 문화유산 관련 다양한 연구개발을 기획하고 진행하고 있는 만큼 미래가치를 위한 핵심기술 개발에 앞장서고자 합니다.",
         },
         {
-          variant: "#cc2055",
+          variant: "third",
+          color: "#cc2055",
           title: "미래교육",
           desc: "미래의 디지털 문화유산은 일상생활 속에서 다양한 기술력으로 과거와 현재를 잇는 가치 창출과 문화유산 인프라 구축을 위한 신산업으로 확장될 것입니다. 이러한 문화유산의 지속성을 위해서는 MZ 세대들에게 우리의 역사와 최신 디지털 기술을 융합할 수 있는 하이브리드형 교육에 앞장서야 합니다. VR, AR, 게임 메이킹, 드론·로봇 코딩, 메타버스 등을 문화유산과 연결하면 우리의 문화유산은 다음 세대에 자연스럽게 전승될 수 있습니다.",
         },
         {
-          variant: "#f5b442",
+          variant: "sub-2",
+          color: "#f5b442",
           title: "부대행사",
           desc: "문화유산 상품마켓·체험, 푸드트럭, 무형문화재 공연, 버스킹공연, 야간 미디어파사드 등",
         },

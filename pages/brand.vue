@@ -6,12 +6,15 @@
         id="signature"
         variant="sub-2"
       />
+      <pending-text />
     </section>
     <section class="section-gap">
       <header-underbar title="로고 변형" id="logos" variant="sub-2" />
+      <pending-text />
     </section>
     <section class="section-gap">
       <header-underbar title="전용 색상" id="colors" variant="sub-2" />
+      <pending-text />
     </section>
   </div>
 </template>

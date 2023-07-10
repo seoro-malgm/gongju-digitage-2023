@@ -1,22 +1,18 @@
 <template>
   <div>
-    <section class="bg-gray-300 py-5">
+    <section class="bg-gray-300 py-5 min-vh-100">
       <b-container class="mb-5 py-5">
         <header class="py-3">
           <h2 class="text-black-han text-36 text-md-48 text-lg-56 underbar">
             사전등록하세요!
           </h2>
           <p class="text-15 text-md-20">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. A similique
-            sapiente, nobis debitis consequatur hic. Quae tempora vel eaque
-            nihil sed architecto assumenda quas doloribus, esse quia reiciendis
-            iusto dolores, necessitatibus animi aliquam dolor? Dolore,
-            necessitatibus, aspernatur aliquam dolor alias ex laboriosam
-            reprehenderit assumenda ipsa id quos dolorum consectetur itaque.
+            현재 프로그램이 준비중입니다. 프로그램이 모두 준비되면 사전등록이
+            가능하도록 신청을 열어두겠습니다!
           </p>
         </header>
         <div class="mt-4">
-          <b-form @submit.prevent="preRegister">
+          <!-- <b-form @submit.prevent="preRegister">
             <b-input-group
               class="input-group align-items-start mb-4 flex-nowrap"
             >
@@ -71,7 +67,7 @@
                 </div>
               </b-col>
             </b-row>
-          </b-form>
+          </b-form> -->
         </div>
       </b-container>
     </section>

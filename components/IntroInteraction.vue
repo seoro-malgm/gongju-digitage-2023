@@ -11,7 +11,7 @@
         class="text-100 text-md-120 text-lg-160 text-xl-240 fw-900 lh-88 text-black-han"
       >
         <span class="word" :class="{ shown: scrollY >= 0 }"> DIVE <br /> </span>
-        <span class="word" :class="{ shown: scrollY >= 200 }"> into</span>
+        <span class="word" :class="{ shown: scrollY >= 100 }"> into</span>
       </h1>
       <div class="">
         <div class="letter">
@@ -25,10 +25,10 @@
               backgroundRepeat: 'no-repeat',
             }"
           >
-            <span class="word" :class="{ shown: scrollY >= 700 }">
+            <span class="word" :class="{ shown: scrollY >= 500 }">
               DIGITAL <br
             /></span>
-            <span class="word" :class="{ shown: scrollY >= 1500 }">
+            <span class="word" :class="{ shown: scrollY >= 800 }">
               HERITAGE
             </span>
           </h1>
@@ -57,6 +57,7 @@ export default {
       index: 0,
       observer: null,
       pinned: false,
+      interval: false,
     };
   },
   computed: {
@@ -73,36 +74,36 @@ export default {
     },
   },
   watch: {
-    scrollY(n) {
-      if (!(n % 3)) {
+    // scrollY(n) {
+    //   if (!(n % 3)) {
+    //     this.index = Math.round(Math.random() * 13);
+    //   }
+    // },
+  },
+  mounted() {
+    // console.log(process.env.NODE_ENV);
+    // if (process.env.NODE_ENV !== "development") {
+    this.init();
+    // }
+  },
+  beforeDestroy() {
+    if (this.interval) {
+      clearInterval(this.interval);
+    }
+  },
+  methods: {
+    async init() {
+      this.interval = setInterval(() => {
         this.index = Math.round(Math.random() * 13);
-      }
+      }, 400);
     },
   },
-  // mounted() {
-  //   this.observer = new IntersectionObserver((entries) => {
-  //     // We only have one entry. Is it visible?
-  //     console.log(entries[0].intersectionRatio);
-  //     if (entries[0].intersectionRatio) {
-  //       this.$emit("trigger");
-  //       // console.log("%c Hello ", "background: #333399; color: #ededed");
-  //       this.pinned = true;
-  //     } else {
-  //       if (this.pinned) {
-  //         this.pinned = false;
-  //       }
-  //     }
-  //   });
-
-  //   // Observe the dummy footer element
-  //   this.observer.observe(this.$refs.target);
-  // },
 };
 </script>
 
 <style lang="scss" scoped>
 #intro-interaction {
-  height: 6000px;
+  height: 3000px;
   background-size: cover;
 }
 .action-wrap {
@@ -123,7 +124,7 @@ export default {
       background-clip: text;
       -webkit-background-clip: text;
       color: transparent;
-      transition: background-image 0.5s $default-ease;
+      // transition: background-image 0.5s $default-ease;
     }
   }
   .content {

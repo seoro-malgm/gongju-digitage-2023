@@ -1,10 +1,44 @@
 <template>
   <footer id="gnf">
     <b-container fluid class="py-3 pb-5">
-      주관:국립공주대학교 공주학연구원 | 알엠소프트 <br />
-      주최:공주시 <br />
-      문의: 공주학연구원 (041-850-0448)
-      <!-- <ul class="list-unstyled"></ul> -->
+      <ul class="list-unstyled">
+        <li class="mb-1">
+          <span class="text-15 text-md-16">
+            주최:
+            <a href="https://www.gongju.go.kr/kr/index.do" target="_blank">
+              공주시청
+            </a>
+          </span>
+        </li>
+        <li class="mb-1">
+          <span class="text-15 text-md-16">
+            주관:
+            <a
+              href="https://kjhak.kongju.ac.kr/M01045/index.do"
+              target="_blank"
+            >
+              국립공주대학교 공주학연구원
+            </a>
+            |
+            <a href="https://www.rmsoft.co.kr/" target="_blank"> 알엠소프트 </a>
+          </span>
+        </li>
+        <li class="mb-1">
+          <span class="text-15 text-md-16">
+            후원:
+            <a href="https://www.cha.go.kr/main.html" target="_blank">
+              문화재청
+            </a>
+          </span>
+        </li>
+        <li class="mb-1">
+          <span class="text-15 text-md-16">
+            문의: 공주학연구원 (
+            <a href="tel:041-850-0448">041-850-0448</a>
+            )
+          </span>
+        </li>
+      </ul>
 
       <nav class="footer-nav">
         <b-btn variant="link " to="/brand">

@@ -2,42 +2,7 @@
   <div>
     <section class="intro border-top border-black">
       <intro-interaction :scrollY="scrollY" />
-      <!-- :hidden="hideIntro" -->
 
-      <!-- <b-container fluid class="my-5 my-lg-0 py-5">
-        <header class="text-center py-5">
-          <h1
-            class="text-88 text-md-120 text-lg-160 text-xl-260 fw-900 lh-88 text-black-han position-fixed"
-            :style="{
-              letterSpacing: '-6px',
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%)',
-            }"
-          >
-            DIVE into
-            <br />
-            DIGITAL
-            <br />
-            HERITAGE
-          </h1>
-        </header>
-        bars
-        <client-only>
-          <div
-            class="bar bg-black"
-            v-for="(item, i) in bars"
-            :key="i"
-            :style="{
-              top: `${item.top}%`,
-              left: `${item.left}%`,
-              width: `${item.width}%`,
-              height: `${item.height}%`,
-            }"
-          />
-          backgroundColor: `rgba(${item.r}, ${item.g}, ${item.b}, 1)`,
-        </client-only>
-      </b-container> -->
       <!-- scroll down -->
       <div class="scroll-down">
         <span class="text-18 text-md-20">Scroll Down</span>
@@ -45,7 +10,11 @@
       </div>
     </section>
     <div class="wrapper">
-      <section class="bg-black text-white py-5">
+      <section
+        class="text-white py-5"
+        :class="`bg-${[posters[posterIndex]]}`"
+        :style="{ transition: 'background-color 0.5s' }"
+      >
         <b-container class="my-md-5 py-5">
           <b-row align-v="stretch">
             <b-col cols="12" lg="7" order="1" order-md="0" class="pt-4 pb-5">
@@ -78,35 +47,64 @@
                 <strong class="text-20 text-md-28">아트센터 고마</strong>
               </div>
               <div class="mt-3">
-                <b-btn variant="primary " to="/info#일정_안내">
-                  <span class="mx-1 fw-700 text-15 text-md-16"
+                <b-btn variant="sub-2" to="/info#일정_안내">
+                  <span class="mx-1 fw-700 text-15 text-md-20"
                     >자세한 일정 보기
                   </span>
                   <i class="icon icon-right-big" />
                 </b-btn>
               </div>
             </b-col>
-            <b-col cols="12" md="5" class="">
-              <img
+            <b-col cols="12" md="5">
+              <!-- <img
                 class="w-100 shadow-lg"
                 :src="require('@/assets/dummy.png')"
                 alt="더미이미지"
-              />
+              /> -->
+              <client-only>
+                <div class="slide-poster">
+                  <carousel
+                    :perPage="1"
+                    :paginationEnabled="false"
+                    :autoplay="true"
+                    :loop="true"
+                    :autoplayTimeout="2000"
+                    v-model="posterIndex"
+                  >
+                    <slide
+                      v-for="(item, i) in posters"
+                      :key="i"
+                      class="bg-img ratio-sm-141 ratio-141"
+                      :style="{
+                        backgroundImage: `url(${require(`@/assets/images/poster_${i}.png`)})`,
+                        backgroundRepeat: 'no-repeat',
+                      }"
+                    >
+                    </slide>
+                  </carousel>
+                </div>
+              </client-only>
             </b-col>
           </b-row>
         </b-container>
       </section>
-      <marquee-text text="DIVE into DIGITAL HERITAGE" />
+      <marquee-text
+        text="DIVE into DIGITAL HERITAGE"
+        :variant="`${[posters[posterIndex]]}`"
+      />
       <!-- 지도 및 오시는 길 -->
       <section>
         <b-row>
           <b-col cols="12" md="7">
-            <div
+            <!-- 구글맵 -->
+            <map-google />
+            <!-- !구글맵 -->
+            <!-- <div
               class="bg-img ratio-67"
               :style="{
                 backgroundImage: `url(${require('@/assets/map-dummy.png')})`,
               }"
-            ></div>
+            ></div> -->
           </b-col>
           <b-col cols="12" md="5">
             <article class="py-5 px-3">
@@ -164,8 +162,9 @@
                     무료 셔틀버스
                   </span>
                   <div class="text-15 text-md-20 mt-2">
-                    Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                    Sit, qui?
+                    준비중입니다.
+                    <!-- Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                    Sit, qui? -->
                   </div>
                 </li>
               </ul>
@@ -173,7 +172,10 @@
           </b-col>
         </b-row>
       </section>
-      <marquee-text text="DIVE into DIGITAL HERITAGE" />
+      <marquee-text
+        text="DIVE into DIGITAL HERITAGE"
+        :variant="`${[posters[posterIndex]]}`"
+      />
       <!-- 참여기관 -->
       <section class="py-5 border-bottom border-black">
         <header class="text-center mb-4 py-3">
@@ -182,7 +184,7 @@
           </h2>
         </header>
         <b-container class="mb-5 p-5 pb-0 bg-gray-100">
-          <b-row class="mx-n2">
+          <!-- <b-row class="mx-n2">
             <b-col
               cols="6"
               md="4"
@@ -195,85 +197,10 @@
                 <span class="text-white">로고 이미지</span>
               </div>
             </b-col>
-          </b-row>
+          </b-row> -->
+          <pending-text />
         </b-container>
       </section>
-      <!-- <section class="bg-gray-300 py-5">
-      <b-container class="mb-5 py-5">
-        <header class="py-3">
-          <h2 class="text-black-han text-36 text-md-48 text-lg-56 underbar">
-            사전등록하세요!
-          </h2>
-          <p class="text-15 text-md-20">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. A similique
-            sapiente, nobis debitis consequatur hic. Quae tempora vel eaque
-            nihil sed architecto assumenda quas doloribus, esse quia reiciendis
-            iusto dolores, necessitatibus animi aliquam dolor? Dolore,
-            necessitatibus, aspernatur aliquam dolor alias ex laboriosam
-            reprehenderit assumenda ipsa id quos dolorum consectetur itaque.
-          </p>
-        </header>
-        <div class="mt-4">
-          <b-form @submit.prevent="preRegister">
-            <b-input-group class="input-group align-items-start mb-4">
-              <template #prepend>이름</template>
-              <div class="d-flex flex-column">
-                <b-form-input
-                  placeholder="이름을 입력하세요"
-                  class="mt-1"
-                  v-model="form.name"
-                />
-                <b-form-radio-group
-                  class="input-group p-0 align-items-center"
-                  id="isForeigner"
-                  v-model="form.isForeigner"
-                >
-                  <b-form-radio :value="false">내국인</b-form-radio>
-                  <b-form-radio :value="true">외국인</b-form-radio>
-                </b-form-radio-group>
-              </div>
-            </b-input-group>
-
-            <b-input-group class="input-group mb-4">
-              <template #prepend>연락처</template>
-              <b-form-input
-                placeholder="연락처를 입력하세요('-' 제외)"
-                v-model="form.name"
-              />
-            </b-input-group>
-            <b-input-group class="input-group mb-4">
-              <template #prepend>신청 프로그램</template>
-              <b-form-select v-model="form.program">
-                <b-form-select-option :value="null">
-                  선택하세요
-                </b-form-select-option>
-              </b-form-select>
-            </b-input-group>
-            <b-row class="mt-4" align-h="center">
-              <b-col cols="10" md="8" lg="6">
-                <b-btn variant="sub-2 text-white fw-700 px-3 py-3 w-100"
-                  >사전등록</b-btn
-                >
-              </b-col>
-            </b-row>
-          </b-form>
-        </div>
-      </b-container>
-    </section> -->
-      <!-- 플로팅버튼 -->
-      <!-- <btn-floating
-        :position="{
-          bottom: onScrolled ? '2.5rem' : '-4rem',
-          right: '1.5rem',
-        }"
-        variant="sub-2 text-white"
-        @click="$router.push('/pre-register')"
-      >
-        <template #content>
-          <span class="mx-1 fw-700 text-15 text-md-16">사전등록 하러가기</span>
-          <i class="icon icon-right-big" />
-        </template>
-      </btn-floating> -->
     </div>
   </div>
 </template>
@@ -301,67 +228,14 @@ export default {
   },
   data() {
     return {
-      bars: [
-        {
-          top: 48,
-          left: 50,
-          width: 60,
-          height: 25,
-          // r: 0,
-          // g: 0,
-          // b: 0,
-        },
-        {
-          top: 50,
-          left: 50,
-          width: 0,
-          height: 0,
-          // r: 0,
-          // g: 0,
-          // b: 0,
-        },
-        {
-          top: 50,
-          left: 50,
-          width: 0,
-          height: 0,
-          // r: 0,
-          // g: 0,
-          // b: 0,
-        },
-        {
-          top: 50,
-          left: 50,
-          width: 0,
-          height: 0,
-          // r: 0,
-          // g: 0,
-          // b: 0,
-        },
-        {
-          top: 50,
-          left: 50,
-          width: 0,
-          height: 0,
-          // r: 0,
-          // g: 0,
-          // b: 0,
-        },
-      ],
-      barsInterval: null,
       form: {
         name: null,
         isForeigner: false,
         phone: null,
         program: null,
       },
-      // hideIntro: null,
-      // items: [{}, {}, {}, {}],
-      // allCategories,
-      // pending: {
-      //   items: false,
-      // },
-      // intro: null,
+      posters: ["primary", "secondary", "third"],
+      posterIndex: 0,
     };
   },
   computed: {
@@ -382,31 +256,7 @@ export default {
       // this.getItems(n);
     },
   },
-  mounted() {
-    // await this.init();
-    // this.barInit();
-  },
-  beforeDestroy() {
-    // clearInterval(this.barsInterval);
-  },
   methods: {
-    async barInit() {
-      this.barsInterval = setInterval(() => {
-        for (let i = 0; i < this.bars.length; i++) {
-          const newBar = {
-            top: Math.random() * 100,
-            left: Math.random() * 100,
-            width: Math.random() * 30,
-            height: Math.random() * 30,
-            // r: Math.random() * 255,
-            // g: Math.random() * 255,
-            // b: Math.random() * 255,
-          };
-          this.$set(this.bars, i, newBar);
-        }
-        // console.log(this.bars);
-      }, 3000);
-    },
     scrollToBottom() {
       window.scrollTo(0, document.body.scrollHeight);
     },
@@ -527,5 +377,9 @@ section.intro {
     display: flex;
     opacity: 1;
   }
+}
+
+.slide-poster {
+  box-shadow: 0 0 24px rgba($color: #000000, $alpha: 0.3);
 }
 </style>

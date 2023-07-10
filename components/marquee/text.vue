@@ -7,6 +7,7 @@
     >
       <div
         class="text mr-5 text-nowrap text-20 text-md-40 text-black-han"
+        :class="`text-${variant}`"
         v-for="i in 50"
         :key="i"
       >
@@ -22,6 +23,10 @@ export default {
     text: {
       type: String,
       default: null,
+    },
+    variant: {
+      type: String,
+      default: "black",
     },
   },
   data() {
@@ -65,6 +70,9 @@ export default {
     top: 50%;
     left: 0;
     display: inline-flex;
+    .text {
+      transition: color 0.5s $default-ease;
+    }
   }
 }
 </style>

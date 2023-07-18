@@ -119,4 +119,11 @@ export default {
     }
   }
 }
+a:link,
+a:visited,
+a:active,
+a:hover {
+  color: $white;
+  text-decoration: none;
+}
 </style>

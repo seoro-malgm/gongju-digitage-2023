@@ -3,9 +3,7 @@
     <section class="bg-gray-300 py-5 min-vh-100">
       <b-container class="mb-5 py-5">
         <header class="pb-4 text-center">
-          <h2 class="text-black-han text-36 text-md-48 text-lg-56 underbar">
-            예약확인
-          </h2>
+          <h2 class="text-36 text-md-48 text-lg-56 underbar">예약확인</h2>
         </header>
         <b-row align-h="center">
           <b-col cols="11" md="10">

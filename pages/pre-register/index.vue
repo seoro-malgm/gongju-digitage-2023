@@ -1,9 +1,9 @@
 <template>
   <div>
-    <section class="bg-gray-300 py-5 min-vh-100">
+    <section class="py-5 min-vh-100">
       <b-container class="mb-5 py-5">
         <header class="py-3">
-          <h2 class="text-black-han text-36 text-md-48 text-lg-56 underbar">
+          <h2 class="text-36 text-md-48 text-lg-56 underbar">
             사전등록하세요!
           </h2>
           <p class="text-15 text-md-20">
@@ -12,6 +12,7 @@
           </p>
         </header>
         <div class="mt-4">
+          <form-pre-register @submit="preRegister" />
           <!-- <b-form @submit.prevent="preRegister">
             <b-input-group
               class="input-group align-items-start mb-4 flex-nowrap"

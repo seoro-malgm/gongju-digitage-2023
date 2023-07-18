@@ -9,7 +9,7 @@ export default {
   props: {
     text: {
       type: String,
-      default: "준비중입니다",
+      default: "7월 중 오픈 예정",
     },
   },
 };

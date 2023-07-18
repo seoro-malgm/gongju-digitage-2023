@@ -33,14 +33,14 @@ export default {
     position: relative;
     display: inline-block;
     z-index: 2;
-    font-family: "Black Han Sans", "Noto Sans KR", sans-serif;
-    font-weight: 400;
+    font-family: "Pretendard-Bold", "Noto Sans KR", sans-serif;
+    font-weight: 700;
     &:after {
       position: absolute;
       z-index: -1;
       content: "";
       display: block;
-      bottom: 25%;
+      bottom: 20%;
       left: 50%;
       width: 120%;
       height: 35%;

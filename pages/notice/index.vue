@@ -1,115 +1,149 @@
 <template>
   <b-container fluid class="my-5">
-    <header-underbar title="FAQ" id="faq" variant="sub-2" />
-    <section class="mt-3">
-      <template v-if="pending.items">
-        <Loading />
-      </template>
-      <template v-else>
-        <template v-if="!items.length">
-          <!-- <div class="p-4 text-center">
-            <span class="text-light">글이 아직 없습니다.</span>
-          </div> -->
+    <!-- 공지사항 -->
+    <div class="mb-5">
+      <header-underbar title="공지사항" id="notice" variant="sub-2" />
+      <section class="mt-3">
+        <template v-if="pending.items">
+          <Loading />
         </template>
         <template v-else>
-          <section>
-            <!-- <ul class="border-top border-black">
-              <li
-                v-for="(item, i) in items"
-                :key="i"
-                class="border-bottom border-black"
-              >
-                <b-row class="py-3">
-                  <b-col cols="2">
-                    <strong class="text-15 text-md-20 fw-700 text-uppercase">
-                      {{ item.type }}
-                    </strong>
-                  </b-col>
-                  <b-col cols="10">
-                    <b-btn
-                      block
-                      variant="text p-0 d-flex align-items-start"
-                      v-b-toggle="`item-${i}`"
-                    >
-                      <span class="fw-700 text-15 text-md-20">
-                        {{ item.title }}
-                      </span>
-                    </b-btn>
-                  </b-col>
-                </b-row>
+          <template v-if="!notices.length">
+            <div class="p-4 text-center">
+              <span class="text-light">글이 아직 없습니다.</span>
+            </div>
+          </template>
+          <template v-else>
+            <section>
+              <ul class="border-top border-black">
+                <li
+                  v-for="(item, i) in notices"
+                  :key="i"
+                  class="border-bottom border-black"
+                >
+                  <b-row class="py-3">
+                    <b-col cols="2">
+                      <strong class="text-15 text-md-20 fw-700 text-uppercase">
+                        {{ item.type }}
+                      </strong>
+                    </b-col>
+                    <b-col cols="10">
+                      <b-btn
+                        block
+                        variant="text p-0 d-flex align-items-start"
+                        v-b-toggle="`notice-${i}`"
+                      >
+                        <span class="fw-700 text-15 text-md-20">
+                          {{ item.title }}
+                        </span>
+                      </b-btn>
+                    </b-col>
+                  </b-row>
 
-                <b-collapse :id="`item-${i}`" accordion="faqs" role="tabpanel">
-                  <div class="p-3 bg-gray-200">
-                    <b-row>
-                      <b-col cols="10" offset="2">
-                        <p class="text-15 text-md-20">
-                          {{ item.content }}
-                        </p>
-                      </b-col>
-                    </b-row>
-                  </div>
-                </b-collapse>
-              </li>
-            </ul> -->
-            <pending-text />
-          </section>
+                  <b-collapse
+                    :id="`notice-${i}`"
+                    accordion="faqs"
+                    role="tabpanel"
+                  >
+                    <div class="p-3 bg-gray-200">
+                      <b-row>
+                        <b-col cols="10" offset="2">
+                          <p class="text-15 text-md-20">
+                            {{ item.content }}
+                          </p>
+                        </b-col>
+                      </b-row>
+                    </div>
+                  </b-collapse>
+                </li>
+              </ul>
+            </section>
+          </template>
         </template>
-      </template>
-    </section>
-    <!-- <btn-view-more /> -->
+      </section>
+    </div>
+    <!-- faq -->
+    <div class="mb-5">
+      <header-underbar title="자주 묻는 질문" id="faqs" variant="sub-2" />
+      <section class="mt-3">
+        <template v-if="pending.items">
+          <Loading />
+        </template>
+        <template v-else>
+          <template v-if="!faqs.length">
+            <div class="p-4 text-center">
+              <span class="text-light">글이 아직 없습니다.</span>
+            </div>
+          </template>
+          <template v-else>
+            <section>
+              <ul class="border-top border-black">
+                <li
+                  v-for="(item, i) in faqs"
+                  :key="i"
+                  class="border-bottom border-black"
+                >
+                  <b-row class="py-3">
+                    <b-col cols="2">
+                      <strong class="text-15 text-md-20 fw-700 text-uppercase">
+                        {{ item.type }}
+                      </strong>
+                    </b-col>
+                    <b-col cols="10">
+                      <b-btn
+                        block
+                        variant="text p-0 d-flex align-items-start"
+                        v-b-toggle="`faq-${i}`"
+                      >
+                        <span class="fw-700 text-15 text-md-20">
+                          {{ item.title }}
+                        </span>
+                      </b-btn>
+                    </b-col>
+                  </b-row>
+
+                  <b-collapse :id="`faq-${i}`" accordion="faqs" role="tabpanel">
+                    <div class="p-3 bg-gray-200">
+                      <b-row>
+                        <b-col cols="10" offset="2">
+                          <p class="text-15 text-md-20">
+                            {{ item.content }}
+                          </p>
+                        </b-col>
+                      </b-row>
+                    </div>
+                  </b-collapse>
+                </li>
+              </ul>
+            </section>
+          </template>
+        </template>
+      </section>
+    </div>
   </b-container>
 </template>
 
 <script>
 export default {
   layout: "default",
-  head() {
-    return {
-      title: `신물결 | 메거진`,
-    };
-  },
+
   async asyncData({ app, $firebase, query }) {
     // const { category } = query;
     // if (!category) app.router.push("/");
-    const items = [
+    const notices = [
+      { type: "공지사항", title: "새로운 소식", content: "~해야합니다" },
+    ];
+    const faqs = [
       {
         type: "faq",
-        title: "~은 어떻게 해야하나요?",
-        content: "~해야합니다",
+        title: "사전등록은 언제 시작되나요?",
+        content: "7월중 예정입니다",
       },
-      { type: "공지사항", title: "새로운 소식", content: "~해야합니다" },
-      { type: "규정", title: "규정 제목", content: "규정입니다." },
-      {
-        type: "faq",
-        title: "~은 어떻게 해야하나요?",
-        content: "~해야합니다",
-      },
-      { type: "공지사항", title: "새로운 소식", content: "~해야합니다" },
-      { type: "규정", title: "규정 제목", content: "규정입니다." },
-      {
-        type: "faq",
-        title: "~은 어떻게 해야하나요?",
-        content: "~해야합니다",
-      },
-      { type: "공지사항", title: "새로운 소식", content: "~해야합니다" },
-      { type: "규정", title: "규정 제목", content: "규정입니다." },
-      {
-        type: "faq",
-        title: "~은 어떻게 해야하나요?",
-        content: "~해야합니다",
-      },
-      { type: "공지사항", title: "새로운 소식", content: "~해야합니다" },
-      { type: "규정", title: "규정 제목", content: "규정입니다." },
-      {
-        type: "faq",
-        title: "~은 어떻게 해야하나요?",
-        content: "~해야합니다",
-      },
-      { type: "공지사항", title: "새로운 소식", content: "~해야합니다" },
-      { type: "규정", title: "규정 제목", content: "규정입니다." },
-    ]; // await $firebase().getAllBoardItems(null);
+    ];
+    // await $firebase().getAllBoardItems(null);
     return {
-      items,
+      notices,
+      faqs,
     };
   },
   data() {

@@ -1,23 +1,17 @@
 <template>
-  <div class="main-inner-padding">
-    <b-container class="mb-3">
-      <header class="page-header">
-        <h1 class="page-title">About</h1>
-        <p class="page-description">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit,
-          aliquam!
-        </p>
-      </header>
-    </b-container>
-
-    <section class="section-gap mt-3">
-      <b-container> ... </b-container>
+  <b-container fluid class="my-5">
+    <header-underbar title="전시소개" id="about" variant="sub-2" />
+    <section class="mt-3">
+      <pending-text />
     </section>
-  </div>
+    <!-- <btn-view-more /> -->
+  </b-container>
 </template>
 
 <script>
-export default {};
+export default {
+  layout: "default",
+};
 </script>
 
 <style lang="scss" scoped></style>

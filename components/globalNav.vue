@@ -16,10 +16,11 @@
           replace
           class="logo-link btn btn-text px-0 py-1 py-xl-2 border-0"
         >
+          <img :src="require('@/assets/favicon.png')" alt="" />
           <div
-            class="letter text-24 text-md-32 text-xl-40 mb-n1 text-black-han text-left lh-100"
+            class="letter text-24 text-md-32 text-xl-40 mb-n1 text-left lh-100 fw-900"
           >
-            디지털 유산전 2023
+            2023 디지털유산전
             <!-- <br class="d-block d-xl-none" />
             <span class="text-16 text-md-32 text-xl-40">
               : DIVE into DIGITAL HERITAGE
@@ -28,7 +29,7 @@
         </router-link>
       </b-navbar-brand>
       <section
-        class="px-2 text-right border-left border-black d-flex align-items-center justify-content-center flex-column"
+        class="px-2 py-0 text-right border-left border-black d-flex align-items-center justify-content-center flex-column"
       >
         <b-btn variant="text btn-hbg" v-b-toggle.collapse-links>
           <div class="hbg">
@@ -49,8 +50,8 @@
             replace
             class="logo-link btn btn-text p-0 border-0"
           >
-            <div class="letter text-24 text-md-36 text-black-han mb-n2">
-              디지털 유산전 2023 : DIVE into DIGITAL HERITAGE
+            <div class="letter text-24 text-md-36  mb-n2">
+              2023 디지털유산전 : DIVE into DIGITAL HERITAGE
             </div>
           </router-link>
         </b-navbar-brand>
@@ -68,11 +69,8 @@
       <b-collapse id="collapse-links" class="px-0" v-model="visible">
         <ul class="list-links flex-column">
           <li v-for="(link, i) in links" :key="i">
-            <router-link
-              :to="link.path"
-              class="btn btn-text text-32 text-lg-40 text-left"
-            >
-              <div class="text-black-han">
+            <router-link :to="link.path" class="text-32 text-lg-32 text-left">
+              <div class="">
                 {{ link.name }}
               </div>
             </router-link>
@@ -103,8 +101,12 @@ export default {
         //   name: "HOME",
         //   path: "/",
         // },
+        // {
+        //   name: "전시소개",
+        //   path: "/about",
+        // },
         {
-          name: "관람안내",
+          name: "전시소개",
           path: "/info",
         },
         {
@@ -112,7 +114,7 @@ export default {
           path: "/program",
         },
         {
-          name: "FAQ",
+          name: "공지사항",
           path: "/notice",
         },
         {
@@ -154,23 +156,30 @@ export default {
   background-color: rgba($color: #fff, $alpha: 0.3);
   backdrop-filter: blur(6px);
   .navbar {
-    padding: 0 1rem;
+    padding: 0 1rem 0.25rem;
   }
   .container {
     // flex-direction: column;
   }
   .logo-link {
     display: flex;
-    flex-direction: column;
+    // flex-direction: column;
     align-items: center;
+    img {
+      width: 48px;
+      height: auto;
+      margin-right: 16px;
+    }
     .letter {
       // mix-blend-mode: difference;
+      letter-spacing: -1.3px;
+      color: $gray-800;
+      transition: all 0.2s $default-ease;
     }
     &:hover {
-      color: $primary;
-    }
-    img {
-      width: 200px;
+      .letter {
+        color: $primary;
+      }
     }
   }
   .collapse-warp {
@@ -186,11 +195,14 @@ export default {
     // background-color: white;
     z-index: 2000;
     .list-links {
+      // height: calc(100vh - 48px);
+      backdrop-filter: blur(6px);
+      background-color: rgba($color: #fff, $alpha: 0.3);
       display: flex;
       // flex-direction: column;
       align-items: center;
-      justify-content: space-around;
-      align-items: stretch;
+      justify-content: center;
+      text-align: center;
       margin: 0;
       padding: 0;
       // border-top: 1px solid $black;
@@ -202,19 +214,22 @@ export default {
         width: 100%;
         margin: 0;
         white-space: nowrap;
-        // text-align: center;
+        text-align: center;
         a {
           padding: 0.5rem 1rem;
           transition: all 0.2s;
           border-radius: 0;
           width: 100%;
-          // text-align: left;
+          font-weight: 300;
+          text-decoration: none;
+          display: inline-block;
+          color: $darkest;
           font-weight: 700;
           &.router-link-active,
           &:hover {
-            font-weight: 700;
+            font-weight: 900;
             background-color: $primary;
-            color: white;
+            color: $white;
           }
         }
       }
@@ -240,13 +255,13 @@ export default {
     position: absolute;
     width: 24px;
     &:first-child {
-      top: 10px;
+      top: 6px;
     }
     &:nth-child(2) {
-      top: 18px;
+      top: 14px;
     }
     &:last-child {
-      top: 26px;
+      top: 22px;
     }
   }
   &.not-collapsed {

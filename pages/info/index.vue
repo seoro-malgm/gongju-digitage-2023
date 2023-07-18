@@ -1,11 +1,11 @@
 <template>
   <div>
-    <marquee-text
+    <!-- <marquee-text
       text="DIVE into DIGITAL HERITAGE"
       :variant="intros[introIndex]?.variant"
-    />
+    /> -->
     <!-- 관람 안내 -->
-    <section class="section-gap my-0 pb-2 border-black">
+    <section class="section-gap mt-3 pb-2 border-black">
       <!-- <header-underbar title="관람 안내" id="관람_안내" variant="sub-2" /> -->
 
       <div class="info-carousel">
@@ -54,11 +54,11 @@
         </client-only>
       </div>
     </section>
-    <marquee-text
+    <!-- <marquee-text
       text="DIVE into DIGITAL HERITAGE"
       class="mt-1"
       :variant="intros[introIndex]?.variant"
-    />
+    /> -->
 
     <!-- !관람 안내 -->
     <!-- 일정 안내 -->
@@ -69,7 +69,7 @@
           <header
             class="py-2 border-top border-bottom border-black text-center"
           >
-            <h4 class="text-black-han text-24 text-md-40">10월 6일(금)</h4>
+            <h4 class="text-24 text-md-40">10월 6일(금)</h4>
           </header>
         </b-col>
         <b-col
@@ -80,7 +80,7 @@
           <header
             class="py-2 border-top border-bottom border-black text-center"
           >
-            <h4 class="text-black-han text-24 text-md-40">10월 6일(토)</h4>
+            <h4 class="text-24 text-md-40">10월 6일(토)</h4>
           </header>
           <!-- <section class="p-3 border-bottom calendar-wrap">
            <ul class="list-calendar">
@@ -96,7 +96,7 @@
           <header
             class="py-2 border-top border-bottom border-black text-center"
           >
-            <h4 class="text-black-han text-24 text-md-40">10월 6일(일)</h4>
+            <h4 class="text-24 text-md-40">10월 6일(일)</h4>
           </header>
         </b-col>
         <b-col

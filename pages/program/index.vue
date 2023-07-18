@@ -54,8 +54,10 @@
           v-for="(item, i) in items"
           :key="i"
         >
-          <figure
-            class="border border-black bg-img ratio-100 position-relative"
+          <router-link
+            to="/program/1"
+            tag="figure"
+            class="border border-black bg-img ratio-100 position-relative cursor-pointer"
             :style="{
               backgroundImage: `url(${require('@/assets/dummy.png')})`,
             }"
@@ -70,7 +72,7 @@
                 </li>
               </ul>
             </header>
-          </figure>
+          </router-link>
           <figcaption
             class="p-2 border-left border-right border-bottom border-black"
           >

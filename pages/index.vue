@@ -11,6 +11,11 @@
     </section>
     <div class="wrapper">
       <section
+        class="min-vh-100 bg-black d-flex align-items-center justify-content-center text-white"
+      >
+        영상
+      </section>
+      <section
         class="text-white py-5"
         :class="`bg-${[posters[posterIndex]]}`"
         :style="{ transition: 'background-color 0.5s' }"
@@ -18,34 +23,31 @@
         <b-container class="my-md-5 py-5">
           <b-row align-v="stretch">
             <b-col cols="12" lg="7" order="1" order-md="0" class="pt-4 pb-5">
-              <h2 class="text-40 text-md-56 mt-2 text-black-han">
-                2023 디지털유산전
-              </h2>
+              <h2 class="text-40 text-md-56 mt-2">2023 디지털유산전</h2>
               <article class="mt-2">
-                <p class="text-18 text-md-24">
-                  디지털문화유산전은 문화유산의 계승과 보존을 위해 디지털
-                  문화유산의 가치창출 및 생태계 조성하여 새로운 시대의 흐름을
-                  선도하는데 앞장서고 있습니다.
+                <p class="text-18 text-md-20">
+                  1962년 문화재보호법 제정이래 변화된 문화재 정책 환경을
+                  반영하고 유네스코 등 국제기준에 부합하는 국가유산 체계로
+                  전환하기 위해 제정 추진한 [국가유산기본법]이 27일 국회
+                  본회의에서 통과되었습니다. 국가유산기본법에 따라 기존
+                  '디지털문화유산전'에서 '디지털유산전'으로 새롭게 재탄생합니다.
                 </p>
               </article>
-              <div class="d-flex align-items-center">
+              <div
+                class="d-flex align-items-center"
+                v-for="(item, i) in infos"
+                :key="i"
+              >
                 <span
                   class="bg-white text-black px-4 py-2 rounded-pill fw-700 mr-3"
                 >
-                  기간
+                  {{ item.name }}
                 </span>
-                <h3 class="text-24 text-md-24 text-lg-36 mt-2 mb-3">
-                  2023.10.06(금) - 08(일)
+                <h3 class="text-20 text-md-24 text-lg-30 mt-2 mb-1">
+                  {{ item.value }}
                 </h3>
               </div>
-              <div class="d-flex align-items-center">
-                <span
-                  class="bg-white text-black px-4 py-2 rounded-pill fw-700 mr-3"
-                >
-                  장소
-                </span>
-                <strong class="text-20 text-md-28">아트센터 고마</strong>
-              </div>
+
               <div class="mt-3">
                 <b-btn variant="sub-2" to="/info#일정_안내">
                   <span class="mx-1 fw-700 text-15 text-md-20"
@@ -88,14 +90,40 @@
           </b-row>
         </b-container>
       </section>
-      <marquee-text
+      <!-- 유틸 -->
+      <section class="bg-gray-900 py-4">
+        <b-container class="py-3 py-md-5">
+          <b-row>
+            <b-col cols="6" md="3" v-for="(item, i) in utils" :key="i">
+              <router-link to="/" class="util-btn" tag="button">
+                <div class="mb-2 icon-area">
+                  <i :class="`icon icon-${item?.icon} text-30 text-md-48`" />
+                </div>
+                <div class="text-area text-15 text-md-20">
+                  {{ item.name }}
+                </div>
+              </router-link>
+            </b-col>
+          </b-row>
+        </b-container>
+      </section>
+
+      <!--  !유틸 -->
+      <!-- <marquee-text
         text="DIVE into DIGITAL HERITAGE"
         :variant="`${[posters[posterIndex]]}`"
-      />
+      /> -->
+
       <!-- 지도 및 오시는 길 -->
-      <section>
+      <section class="section-gap">
         <b-row>
-          <b-col cols="12" md="7">
+          <b-col
+            cols="12"
+            md="7"
+            :style="{
+              minHeight: '400px',
+            }"
+          >
             <!-- 구글맵 -->
             <map-google />
             <!-- !구글맵 -->
@@ -108,9 +136,7 @@
           </b-col>
           <b-col cols="12" md="5">
             <article class="py-5 px-3">
-              <h2 class="text-black-han text-36 text-md-48 text-lg-56 underbar">
-                오시는 길
-              </h2>
+              <h2 class="text-36 text-md-48 text-lg-56 underbar">오시는 길</h2>
               <ul class="list-unstyled">
                 <li class="d-flex align-items-center mb-3">
                   <span
@@ -147,6 +173,7 @@
                       <strong>
                         &#x2461; 550번 종합버스터미널(옥룡동방면)
                       </strong>
+                      <br />
                       → 중동 사거리 하차 후 도보 10분
                       <br />
                       → 공주세무서, 북중학교 승차
@@ -172,33 +199,44 @@
           </b-col>
         </b-row>
       </section>
-      <marquee-text
+      <!-- <marquee-text
         text="DIVE into DIGITAL HERITAGE"
         :variant="`${[posters[posterIndex]]}`"
-      />
+      /> -->
       <!-- 참여기관 -->
       <section class="py-5 border-bottom border-black">
         <header class="text-center mb-4 py-3">
-          <h2 class="text-black-han text-36 text-md-48 text-lg-56 underbar">
-            참여 기관
-          </h2>
+          <h2 class="text-36 text-md-48 text-lg-56 underbar">참여 기관</h2>
         </header>
-        <b-container class="mb-5 p-5 pb-0 bg-gray-100">
-          <!-- <b-row class="mx-n2">
+        <b-container
+          class="mb-5 py-5 px- px-md-5 bg-gray-100 position-relative"
+        >
+          <div
+            class="position-absolute text-18 fw-700"
+            :style="{
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+              zIndex: '10',
+            }"
+          >
+            7월 오픈 예정
+          </div>
+          <b-row class="mx-n2">
             <b-col
-              cols="6"
+              cols="4"
               md="4"
               lg="3"
               class="mb-4 px-2"
               v-for="(item, i) in 24"
               :key="i"
             >
-              <div class="bg-img ratio-35 bg-black">
-                <span class="text-white">로고 이미지</span>
+              <div class="bg-img ratio-35 bg-gray-200 text-center">
+                <div class="text-white py-2"></div>
               </div>
             </b-col>
-          </b-row> -->
-          <pending-text />
+          </b-row>
+          <!-- <pending-text /> -->
         </b-container>
       </section>
     </div>
@@ -236,6 +274,31 @@ export default {
       },
       posters: ["primary", "secondary", "third"],
       posterIndex: 0,
+      infos: [
+        { name: "주제", value: "DIVE into DIGITAL HERITAGE" },
+        { name: "기간", value: "2023.10.6(금)~10.8(일)" },
+        { name: "장소", value: "공주 아트센터 고마" },
+        { name: "주최", value: "공주시" },
+        { name: "주관", value: "국립공주대학교 공주학연구원 | 알엠소프트" },
+      ],
+      utils: [
+        {
+          name: "행사 안내",
+          icon: "lock-open-alt",
+        },
+        {
+          name: "부스 안내",
+          icon: "lock-open-alt",
+        },
+        {
+          name: "사전등록",
+          icon: "lock-open-alt",
+        },
+        {
+          name: "프로그램 안내",
+          icon: "lock-open-alt",
+        },
+      ],
     };
   },
   computed: {
@@ -381,5 +444,38 @@ section.intro {
 
 .slide-poster {
   box-shadow: 0 0 24px rgba($color: #000000, $alpha: 0.3);
+}
+
+.util-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  appearance: none;
+  border: 0;
+  background-color: transparent;
+  color: $gray-400;
+  margin: 0 auto;
+  .icon-area {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    transition: all 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .text-area {
+    transition: all 0.3s;
+  }
+  &:hover {
+    .icon-area {
+      background-color: $white;
+      color: $gray-900;
+    }
+    .text-area {
+      font-weight: 900;
+    }
+  }
 }
 </style>

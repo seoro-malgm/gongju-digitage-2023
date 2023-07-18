@@ -30,10 +30,10 @@ input[type="password"] {
   font-family: "Noto Sans KR", sans-serif;
 }
 
-.text-black-han {
-  font-family: "Black Han Sans", "Noto Sans KR", sans-serif !important;
-  font-weight: 400;
-}
+// .text-black-han {
+//   font-family: "Black Han Sans", "Noto Sans KR", sans-serif !important;
+//   font-weight: 400;
+// }
 
 @for $var from 2 through 9 {
   .fw-#{$var}#{"00"} {
@@ -163,7 +163,7 @@ $font-size: (
   }
 }
 
-$line-heights: (80, 88, 90, 100, 135, 160, 165, 170, 180, 200, 225);
+$line-heights: (70, 80, 88, 90, 100, 135, 160, 165, 170, 180, 200, 225);
 
 @each $var in $line-heights {
   .lh-#{$var} {

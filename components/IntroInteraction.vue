@@ -7,16 +7,14 @@
         ...actionWrapStyles,
       }"
     >
-      <h1
-        class="text-100 text-md-120 text-lg-160 text-xl-240 fw-900 lh-88 text-black-han"
-      >
+      <h1 class="text-100 text-md-120 text-lg-160 text-xl-240 fw-900 lh-80">
         <span class="word" :class="{ shown: scrollY >= 0 }"> DIVE <br /> </span>
         <span class="word" :class="{ shown: scrollY >= 100 }"> into</span>
       </h1>
       <div class="">
         <div class="letter">
           <h1
-            class="text-100 text-md-120 text-lg-160 text-xl-240 fw-900 lh-88 text-black-han"
+            class="text-100 text-md-120 text-lg-160 text-xl-240 fw-900 lh-80"
             :style="{
               backgroundImage: `url(${require(`@/assets/snapshot/snapshot_${index}.png`)})`,
               backgroundColor: 'black',
@@ -68,7 +66,7 @@ export default {
           this.scrollY / 5000 + 0.2
           // scaleUp ? this.scrollY / 3000 : 1
         }) translate(-50%, -50%)`,
-        letterSpacing: `${this.scrollY / 500}px`,
+        letterSpacing: `${this.scrollY / 100}px`,
         transformOrigin: "0 0",
       };
     },
@@ -103,7 +101,7 @@ export default {
 
 <style lang="scss" scoped>
 #intro-interaction {
-  height: 3000px;
+  height: 3500px;
   background-size: cover;
 }
 .action-wrap {

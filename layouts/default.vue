@@ -186,7 +186,13 @@ export default {
 // $gnb-height: 82px;
 #main {
   min-height: 100vh;
-  padding-top: 63px;
+  padding-top: 41px;
+  @media (min-width: $breakpoint-lg) {
+    padding-top: 46px;
+  }
+  @media (min-width: $breakpoint-xl) {
+    padding-top: 61px;
+  }
   &.is-main {
     padding-top: 0;
   }

@@ -3,10 +3,10 @@
     <section class="py-5 min-vh-100">
       <b-container class="mb-5 py-5">
         <header class="py-3">
-          <h2 class="text-36 text-md-48 text-lg-56 underbar">
+          <h2 class="text-36 text-lg-48 text-lg-56 underbar">
             사전등록하세요!
           </h2>
-          <p class="text-15 text-md-20">
+          <p class="text-15 text-lg-20">
             현재 프로그램이 준비중입니다. 프로그램이 모두 준비되면 사전등록이
             가능하도록 신청을 열어두겠습니다!
           </p>
@@ -53,13 +53,13 @@
             <b-row class="mt-4" align-h="center">
               <b-col cols="10" md="8" lg="6">
                 <b-btn
-                  variant="sub-2 text-white fw-700 px-3 py-3 w-100 text-15 text-md-20"
+                  variant="sub-2 text-white fw-700 px-3 py-3 w-100 text-15 text-lg-20"
                   type="submit"
                 >
                   사전등록
                 </b-btn>
                 <div class="mt-1 text-center">
-                  <small class="text-13 text-md-14">
+                  <small class="text-13 text-lg-14">
                     사전등록 확인을 하러 오셨나요?
                   </small>
                   <b-btn variant="link p-0" to="/pre-register/confirm">

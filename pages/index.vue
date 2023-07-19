@@ -1,251 +1,242 @@
 <template>
   <div>
-    <section class="intro border-top border-black">
-      <intro-interaction :scrollY="scrollY" />
-
-      <!-- scroll down -->
-      <div class="scroll-down">
-        <span class="text-18 text-md-20">Scroll Down</span>
-        <div class="line" />
-      </div>
-    </section>
-    <div class="wrapper">
-      <section
-        class="min-vh-100 bg-black d-flex align-items-center justify-content-center text-white"
+    <!-- 인트로 -->
+    <section class="intro min-vh-100 bg-gray-100">
+      <b-container
+        class="min-vh-100 d-flex align-items-center justify-content-around"
       >
-        영상
-      </section>
-      <section
-        class="text-white py-5"
-        :class="`bg-${[posters[posterIndex]]}`"
-        :style="{ transition: 'background-color 0.5s' }"
-      >
-        <b-container class="my-md-5 py-5">
-          <b-row align-v="stretch">
-            <b-col cols="12" lg="7" order="1" order-md="0" class="pt-4 pb-5">
-              <h2 class="text-40 text-md-56 mt-2">2023 디지털유산전</h2>
-              <article class="mt-2">
-                <p class="text-18 text-md-20">
-                  1962년 문화재보호법 제정이래 변화된 문화재 정책 환경을
-                  반영하고 유네스코 등 국제기준에 부합하는 국가유산 체계로
-                  전환하기 위해 제정 추진한 [국가유산기본법]이 27일 국회
-                  본회의에서 통과되었습니다. 국가유산기본법에 따라 기존
-                  '디지털문화유산전'에서 '디지털유산전'으로 새롭게 재탄생합니다.
-                </p>
-              </article>
-              <div
-                class="d-flex align-items-center"
-                v-for="(item, i) in infos"
-                :key="i"
-              >
-                <span
-                  class="bg-white text-black px-4 py-2 rounded-pill fw-700 mr-3"
-                >
-                  {{ item.name }}
-                </span>
-                <h3 class="text-20 text-md-24 text-lg-30 mt-2 mb-1">
-                  {{ item.value }}
-                </h3>
-              </div>
-
-              <div class="mt-3">
-                <b-btn variant="sub-2" to="/info#일정_안내">
-                  <span class="mx-1 fw-700 text-15 text-md-20"
-                    >자세한 일정 보기
-                  </span>
-                  <i class="icon icon-right-big" />
-                </b-btn>
-              </div>
-            </b-col>
-            <b-col cols="12" md="5">
-              <!-- <img
-                class="w-100 shadow-lg"
-                :src="require('@/assets/dummy.png')"
-                alt="더미이미지"
-              /> -->
-              <client-only>
-                <div class="slide-poster">
-                  <carousel
-                    :perPage="1"
-                    :paginationEnabled="false"
-                    :autoplay="true"
-                    :loop="true"
-                    :autoplayTimeout="2000"
-                    v-model="posterIndex"
-                  >
-                    <slide
-                      v-for="(item, i) in posters"
-                      :key="i"
-                      class="bg-img ratio-sm-141 ratio-141"
-                      :style="{
-                        backgroundImage: `url(${require(`@/assets/images/poster_${i}.png`)})`,
-                        backgroundRepeat: 'no-repeat',
-                      }"
-                    >
-                    </slide>
-                  </carousel>
-                </div>
-              </client-only>
-            </b-col>
-          </b-row>
-        </b-container>
-      </section>
-      <!-- 유틸 -->
-      <section class="bg-gray-900 py-4">
-        <b-container class="py-3 py-md-5">
-          <b-row>
-            <b-col cols="6" md="3" v-for="(item, i) in utils" :key="i">
-              <router-link to="/" class="util-btn" tag="button">
-                <div class="mb-2 icon-area">
-                  <i :class="`icon icon-${item?.icon} text-30 text-md-48`" />
-                </div>
-                <div class="text-area text-15 text-md-20">
-                  {{ item.name }}
-                </div>
-              </router-link>
-            </b-col>
-          </b-row>
-        </b-container>
-      </section>
-
-      <!--  !유틸 -->
-      <!-- <marquee-text
-        text="DIVE into DIGITAL HERITAGE"
-        :variant="`${[posters[posterIndex]]}`"
-      /> -->
-
-      <!-- 지도 및 오시는 길 -->
-      <section class="section-gap">
-        <b-row>
-          <b-col
-            cols="12"
-            md="7"
-            :style="{
-              minHeight: '400px',
-            }"
-          >
-            <!-- 구글맵 -->
-            <map-google />
-            <!-- !구글맵 -->
-            <!-- <div
-              class="bg-img ratio-67"
-              :style="{
-                backgroundImage: `url(${require('@/assets/map-dummy.png')})`,
-              }"
-            ></div> -->
-          </b-col>
-          <b-col cols="12" md="5">
-            <article class="py-5 px-3">
-              <h2 class="text-36 text-md-48 text-lg-56 underbar">오시는 길</h2>
-              <ul class="list-unstyled">
-                <li class="d-flex align-items-center mb-3">
-                  <span
-                    class="bg-black text-white px-4 py-2 rounded-pill fw-700 mr-3"
-                  >
-                    주소
-                  </span>
-                  <div class="text-15 text-md-20">
-                    충남 공주시 고마나루길 90
-                  </div>
-                </li>
-                <li class="d-flex align-items-start mb-3">
-                  <span
-                    class="bg-black text-white px-4 py-2 rounded-pill fw-700 mr-3"
-                  >
-                    대중교통
-                  </span>
-
-                  <ul class="list-unstyled text-15 text-md-20">
-                    <li class="mb-0">
-                      <span>
-                        버스 이용시 공주종합버스터미널에서 오시는 법(약 50분
-                        소요)
-                      </span>
-                    </li>
-                    <li class="mb-2">
-                      <strong>
-                        &#x2460; 125번 종합버스터미널(옥룡동방면)
-                      </strong>
-                      <br />
-                      → 문예회관, 경찰서 하차 후 도보 19분
-                    </li>
-                    <li class="mb-2">
-                      <strong>
-                        &#x2461; 550번 종합버스터미널(옥룡동방면)
-                      </strong>
-                      <br />
-                      → 중동 사거리 하차 후 도보 10분
-                      <br />
-                      → 공주세무서, 북중학교 승차
-                      <br />
-                      → 국립공주박물관 하차 후 맞은편
-                    </li>
-                  </ul>
-                </li>
-                <li class="mb-3">
-                  <span
-                    class="bg-black text-white px-4 py-2 rounded-pill fw-700 mr-3"
-                  >
-                    무료 셔틀버스
-                  </span>
-                  <div class="text-15 text-md-20 mt-2">
-                    준비중입니다.
-                    <!-- Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                    Sit, qui? -->
-                  </div>
-                </li>
-              </ul>
-            </article>
+        <b-row class="w-100">
+          <b-col cols="12" md="6">
+            <div class="d-flex flex-column">
+              <h3 class="text-sub-2 text-20 text-lg-32">2023</h3>
+              <h1 class="my-3 my-lg-4">디지털유산전 로고</h1>
+              <h2 class="text-sub-2 text-20 text-lg-36">
+                2023.10.06(금)-08(일)
+              </h2>
+              <h3 class="mt-3 mt-lg-4 text-primary text-18 text-lg-32">
+                아트센터 고마
+              </h3>
+            </div>
           </b-col>
         </b-row>
-      </section>
-      <!-- <marquee-text
-        text="DIVE into DIGITAL HERITAGE"
-        :variant="`${[posters[posterIndex]]}`"
-      /> -->
-      <!-- 참여기관 -->
-      <section class="py-5 border-bottom border-black">
-        <header class="text-center mb-4 py-3">
-          <h2 class="text-36 text-md-48 text-lg-56 underbar">참여 기관</h2>
-        </header>
-        <b-container
-          class="mb-5 py-5 px- px-md-5 bg-gray-100 position-relative"
-        >
-          <div
-            class="position-absolute text-18 fw-700"
-            :style="{
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)',
-              zIndex: '10',
-            }"
-          >
-            7월 오픈 예정
-          </div>
-          <b-row class="mx-n2">
+      </b-container>
+    </section>
+    <!-- 프로그램 -->
+    <section class="program min-vh-100 bg-gray-300 py-5">
+      <b-container class="my-lg-5 py-4 py-lg-5">
+        <header-section
+          small="Program"
+          title="한눈에 살펴보는 디지털유산전"
+          desc="디지털유산전에서 준비한 다양한 프로그램을 만나보세요"
+        />
+        <div class="mt-3 mt-lg-5">
+          <b-row class="mx-lg-n1 flex-column flex-lg-row" align-v="stretch">
             <b-col
-              cols="4"
-              md="4"
-              lg="3"
-              class="mb-4 px-2"
-              v-for="(item, i) in 24"
+              class="mb-3 mb-lg-0 px-lg-1 program-column"
+              v-for="(item, i) in 8"
               :key="i"
+              cols="12"
+              lg="1"
+              :class="{ active: programIndex === i }"
+              @mouseenter="programIndex = i"
             >
-              <div class="bg-img ratio-35 bg-gray-200 text-center">
-                <div class="text-white py-2"></div>
+              <div
+                class="column-content p-3 d-flex flex-column justify-content-between h-100"
+              >
+                <div class="on-active">
+                  <header
+                    class="d-flex flex-column justify-content-between p-0 p-lg-3"
+                  >
+                    <small class="text-16 text-lg-18 mb-2 mb-lg-4"
+                      >미래교육</small
+                    >
+                    <h5 class="text-24 text-lg-28 mb-auto lh-125">
+                      미래미래미래에는 어떤 교육을 하게 될까? 미래미래미래에는
+                      어떤 교육을 하게 될까?
+                    </h5>
+                  </header>
+                </div>
+                <div class="on-default">
+                  <!-- <div class="d-flex align-items-center"> -->
+                  <figure
+                    class="bg-black mb-3 mx-auto d-none d-lg-block"
+                    :style="{ width: '40px', height: '40px' }"
+                  ></figure>
+                  <div class="text mb-3 lh-120 mx-lg-auto">
+                    <small class="text-13 text-lg-14 mb-2 mb-lg-3"
+                      >미래교육</small
+                    >
+                    <h5 class="text-14 text-lg-15 mb-auto">
+                      미래미래미래에는 어떤 교육을 하게 될까?
+                    </h5>
+                  </div>
+                  <!-- </div> -->
+                </div>
+                <!-- footer -->
+                <div
+                  class="column-footer mt-auto mb-0 fw-700 text-15 text-lg-18"
+                >
+                  0{{ i + 1 }}
+                </div>
               </div>
             </b-col>
           </b-row>
-          <!-- <pending-text /> -->
-        </b-container>
-      </section>
-    </div>
+        </div>
+      </b-container>
+    </section>
+    <!-- 아카이빙 -->
+    <section class="archive min-vh-100 py-5">
+      <b-container class="my-lg-5 py-4 py-lg-5">
+        <header-section
+          small="Archive"
+          title="아카이빙"
+          desc="디지털문화산업전에서 준비한 다양한 아카이브를 만나보세요"
+          class="mb-4 mb-lg-5"
+        />
+      </b-container>
+      <div class="mt-4 mt-lg-5">
+        <ul class="list-archive mb-3">
+          <li v-for="(item, i) in 10" :key="i" class="archive-item">
+            <figure class="bg-img ratio-67 bg-white"></figure>
+          </li>
+        </ul>
+        <ul class="list-archive mb-3">
+          <li v-for="(item, i) in 10" :key="i" class="archive-item">
+            <figure class="bg-img ratio-67 bg-white"></figure>
+          </li>
+        </ul>
+      </div>
+    </section>
+    <!-- 공지사항 -->
+    <section class="notice py-5">
+      <b-container class="my-lg-5 py-4 py-lg-5">
+        <header-section
+          small="Notice"
+          title="공지사항"
+          desc="공지사항과 자주묻는 질문을 알려드립니다"
+          class="mb-4 mb-lg-5"
+        />
+        <b-row>
+          <b-col cols="12" lg="6">
+            <header
+              class="d-flex align-items-center justify-content-between pb-2"
+            >
+              <h5 class="text-20 text-lg-24">새소식</h5>
+              <b-btn variant="link text-gray-600 text-13 text-lg-15"
+                >더보기
+                <i class="icon icon-right-open" />
+              </b-btn>
+            </header>
+            <ul class="list-bbs mb-5 mb-lg-0">
+              <b-row tag="li" v-for="(item, i) in 5" :key="i" class="bbs-item">
+                <b-col cols="9" class="text-truncate">
+                  <router-link to="/" class="title">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Obcaecati, ad.
+                  </router-link>
+                </b-col>
+                <b-col cols="3" class="text-right">
+                  <span class="text-gray-600 text-13 text-14">2023.10.21</span>
+                </b-col>
+              </b-row>
+            </ul>
+          </b-col>
+          <b-col cols="12" lg="6">
+            <header
+              class="d-flex align-items-center justify-content-between pb-2"
+            >
+              <h5 class="text-20 text-lg-24">FAQ</h5>
+              <b-btn variant="link text-gray-600 text-13 text-lg-15"
+                >더보기
+                <i class="icon icon-right-open" />
+              </b-btn>
+            </header>
+            <ul class="list-bbs mb-5 mb-lg-0">
+              <b-row tag="li" v-for="(item, i) in 5" :key="i" class="bbs-item">
+                <b-col cols="9" class="text-truncate">
+                  <router-link to="/" class="title">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Obcaecati, ad.
+                  </router-link>
+                </b-col>
+                <b-col cols="3" class="text-right">
+                  <span class="text-gray-600 text-13 text-14">2023.10.21</span>
+                </b-col>
+              </b-row>
+            </ul>
+          </b-col>
+        </b-row>
+      </b-container>
+    </section>
+    <!-- sns -->
+    <section class="sns py-3 py-lg-5">
+      <b-container class="my-lg-5 py-5">
+        <header class="text-center mb-3">
+          <h5 class="text-20 text-lg-32">디지털유산전 SNS</h5>
+        </header>
+        <nav class="tab-sns">
+          <ul class="d-flex align-items-center justify-content-center">
+            <li class="tab-item mx-2">
+              <b-btn
+                variant="text"
+                @click="snsTabIndex = 0"
+                :class="{ active: snsTabIndex === 0 }"
+              >
+                인스타그램
+              </b-btn>
+            </li>
+            <li class="tab-item mx-2">
+              <b-btn
+                variant="text"
+                @click="snsTabIndex = 1"
+                :class="{ active: snsTabIndex === 1 }"
+              >
+                페이스북
+              </b-btn>
+            </li>
+            <li class="tab-item mx-2">
+              <b-btn
+                variant="text"
+                @click="snsTabIndex = 2"
+                :class="{ active: snsTabIndex === 2 }"
+              >
+                유튜브
+              </b-btn>
+            </li>
+          </ul>
+        </nav>
+        <section>
+          <b-row class="my-3 my-lg-5 py-lg-4" align-h="center">
+            <b-col
+              cols="6"
+              lg="20"
+              class="mb-3 mb-lg-0"
+              v-for="(item, i) in 5"
+              :key="i"
+            >
+              <figure class="bg-black ratio-100"></figure>
+            </b-col>
+          </b-row>
+        </section>
+      </b-container>
+    </section>
+    <!-- 협력사 -->
+    <section class="companies pt-3 pb-5">
+      <header class="mt-3 text-center">
+        <h5 class="text-20 text-lg-32 text-gray-600">
+          2023 디지털유산전은 다양한 기업들과 함께합니다.
+        </h5>
+      </header>
+      <ul class="list-companies mb-4 mb-lg-5 py-3">
+        <li class="company-item text-center" v-for="(item, i) in 10" :key="i">
+          <div class="border p-2">기관</div>
+        </li>
+      </ul>
+    </section>
   </div>
 </template>
 
 <script>
-// import allCategories from "~/assets/json/allCategories";
-
 export default {
   layout: "default",
   components: {},
@@ -266,215 +257,163 @@ export default {
   },
   data() {
     return {
-      form: {
-        name: null,
-        isForeigner: false,
-        phone: null,
-        program: null,
-      },
-      posters: ["primary", "secondary", "third"],
-      posterIndex: 0,
-      infos: [
-        { name: "주제", value: "DIVE into DIGITAL HERITAGE" },
-        { name: "기간", value: "2023.10.6(금)~10.8(일)" },
-        { name: "장소", value: "공주 아트센터 고마" },
-        { name: "주최", value: "공주시" },
-        { name: "주관", value: "국립공주대학교 공주학연구원 | 알엠소프트" },
-      ],
-      utils: [
-        {
-          name: "행사 안내",
-          icon: "lock-open-alt",
-        },
-        {
-          name: "부스 안내",
-          icon: "lock-open-alt",
-        },
-        {
-          name: "사전등록",
-          icon: "lock-open-alt",
-        },
-        {
-          name: "프로그램 안내",
-          icon: "lock-open-alt",
-        },
-      ],
+      programIndex: 0,
+      snsTabIndex: 0,
     };
-  },
-  computed: {
-    itemPinned() {
-      if (!this.items?.length) return [];
-      const pinned = this.items.filter((i) => i.pinned);
-      return pinned;
-    },
-    query() {
-      return this.$route.query;
-    },
-    // hideIntro() {
-    //   return !!(this.scrollY >= 1000);
-    // },
-  },
-  watch: {
-    query(n) {
-      // this.getItems(n);
-    },
-  },
-  methods: {
-    scrollToBottom() {
-      window.scrollTo(0, document.body.scrollHeight);
-    },
-    preRegister() {
-      console.log("this.form:", this.form);
-    },
-    // async init() {
-    //   try {
-    //     const [intro] = await Promise.all([this.getIntro()]);
-    //     this.intro = intro;
-    //   } catch (error) {
-    //     console.error("error:", error);
-    //   }
-    // },
-    // async getIntro() {
-    //   try {
-    //     const data = await this.$firebase().getBoardItem("intro-image", "1");
-    //     if (data) {
-    //       return data;
-    //     }
-    //   } catch (error) {
-    //     console.error("error:", error);
-    //   }
-    // },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.wrapper {
-  position: relative;
-  z-index: 2;
-  background-color: white;
-}
-section.intro {
-  // height: 100vh;
-  // max-height: calc(100vh - 75px);
-  position: relative;
-  // > video {
-  //   position: absolute;
-  //   width: 100%;
-  //   top: 50%;
-  //   left: 50%;
-  //   transform: translate(-50%, -50%);
-  //   // z-index: 10;
-  //   @media (max-width: $breakpoint-xl) {
-  //     width: auto;
-  //     min-height: 100vh;
-  //   }
-  // }
-  overflow: hidden;
-  header {
-    h1 {
-      mix-blend-mode: difference;
-      position: relative;
-      z-index: 10;
-      color: white;
+section.program {
+  .program-column {
+    transition: all 0.3s $default-ease;
+    cursor: pointer;
+    .column-content {
+      transition: all 0.3s $default-ease;
+      border-radius: 15px;
+      background-color: #f8f8fa;
+      @media (min-width: $breakpoint-lg) {
+        min-height: 500px;
+      }
+      .on-active {
+        display: none;
+      }
+      .on-default {
+        .text {
+          @media (min-width: $breakpoint-lg) {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+          }
+        }
+      }
+    }
+    &:hover,
+    &.active {
+      @media (min-width: $breakpoint-lg) {
+        flex: 0 0 41.66666667%;
+        max-width: 41.66666667%;
+      }
+
+      .column-content {
+        background-color: #f3ffe5;
+        .on-active {
+          display: block;
+        }
+        .on-default {
+          display: none;
+        }
+      }
     }
   }
-  .bar {
-    min-width: 30vw;
-    min-height: 100px;
-    position: absolute;
-    z-index: 2;
-    transition: all 0.6s $default-ease;
-    transform: translate(-50%, -50%);
-  }
 }
 
-@keyframes updown {
-  0% {
-    height: 0;
-  }
-  100% {
-    height: 80px;
-  }
-}
-.scroll-down {
-  position: absolute;
-  left: 50%;
-  // right: 1rem;
-  // bottom: 0.5rem;
-  top: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  transform: translate(-50%, -100%);
-  mix-blend-mode: difference;
-  color: white;
-  z-index: 10;
-  .line {
-    position: relative;
-    &:after {
-      position: absolute;
-      z-index: -1;
-      content: "";
-      display: block;
-      bottom: 0;
-      left: 50%;
-      width: 2px;
-      height: 0;
-      transform: translateX(-50%);
-      animation-name: updown;
-      animation-timing-function: cubic-bezier(0.165, 0.84, 0.44, 1);
-      animation-duration: 1s;
-      animation-fill-mode: forwards;
-      animation-direction: alternate;
-      animation-iteration-count: infinite;
-      // background-color: $primary;
-      background-color: white;
-    }
-    width: 4px;
-    height: 100px;
-    margin-bottom: 0;
-  }
-  &.active {
+section.archive {
+  background-color: rgba($color: $primary, $alpha: 0.62);
+  .list-archive {
     display: flex;
-    opacity: 1;
-  }
-}
-
-.slide-poster {
-  box-shadow: 0 0 24px rgba($color: #000000, $alpha: 0.3);
-}
-
-.util-btn {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  appearance: none;
-  border: 0;
-  background-color: transparent;
-  color: $gray-400;
-  margin: 0 auto;
-  .icon-area {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    transition: all 0.3s;
-    display: flex;
-    flex-direction: column;
     align-items: center;
-    justify-content: center;
-  }
-  .text-area {
-    transition: all 0.3s;
-  }
-  &:hover {
-    .icon-area {
-      background-color: $white;
-      color: $gray-900;
+    overflow: auto;
+    padding: 0 20px;
+    &::-webkit-scrollbar,
+    &::-webkit-scrollbar-track {
+      display: none;
     }
-    .text-area {
-      font-weight: 900;
+    .archive-item {
+      flex: 0 0 330px;
+      max-width: 330px;
+      margin: 0 10px;
+      figure {
+        border-radius: 25px;
+      }
+    }
+  }
+}
+
+section.notice {
+  background-color: rgba($color: #b7b7b7, $alpha: 0.5);
+  .list-bbs {
+    border-top: 3px solid $gray-700;
+    border-bottom: 3px solid $gray-700;
+    .bbs-item {
+      margin: 0.25rem 0;
+      padding: 1rem 0;
+      border-bottom: 1px dashed $gray-800;
+      &:last-child {
+        border-bottom-width: 0;
+      }
+      position: relative;
+      padding-left: 16px;
+      .title {
+        &:link,
+        &:hover,
+        &:visited {
+          color: $gray-700;
+        }
+      }
+      &:before {
+        position: absolute;
+        z-index: 1;
+        content: "";
+        display: block;
+        top: 45%;
+        left: 12px;
+        width: 8px;
+        height: 8px;
+        transform: translate(-50%, 0);
+        background-color: $gray-900;
+        border-radius: 50%;
+      }
+    }
+  }
+}
+
+.tab-sns {
+  border-bottom: 1px solid $gray-400;
+  .tab-item {
+    .btn {
+      border: 0;
+      border-bottom: 5px solid transparent;
+      border-radius: 0;
+      font-weight: 700;
+      color: $gray-600;
+      &.active {
+        border: 0;
+        color: $gray-800;
+        border-bottom: 5px solid $gray-800;
+      }
+    }
+  }
+}
+.nav-lin.active {
+  border: 0;
+  border-bottom: 5px solid $gray-800 !important;
+}
+
+.col-lg-20 {
+  @media (min-width: $breakpoint-lg) {
+    flex: 0 0 20%;
+    max-width: 20%;
+  }
+}
+
+section.companies {
+  .list-companies {
+    display: flex;
+    align-items: center;
+    overflow: auto;
+    padding: 0 20px;
+    &::-webkit-scrollbar,
+    &::-webkit-scrollbar-track {
+      display: none;
+    }
+    .company-item {
+      flex: 0 0 330px;
+      max-width: 330px;
+      margin: 0 10px;
+      figure {
+        border-radius: 25px;
+      }
     }
   }
 }

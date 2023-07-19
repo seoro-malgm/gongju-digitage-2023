@@ -111,7 +111,12 @@ export default {
       { rel: "preconnect", href: "https://fonts.gstatic.com" },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap",
+      },
+      {
+        rel: "stylesheet",
+        as: "style",
+        href: "https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css",
       },
       {
         rel: "apple-touch-icon",
@@ -171,6 +176,7 @@ export default {
       },
     },
   },
+
   // buildDir: "client",
   generate: {
     dir: "dist",

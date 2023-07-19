@@ -1,5 +1,5 @@
 <template>
-  <div>관람안내</div>
+  <div>컨퍼런스</div>
 </template>
 
 <script>

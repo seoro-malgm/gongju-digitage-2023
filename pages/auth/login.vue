@@ -14,7 +14,7 @@
             >
               <b-card-title
                 title-tag="h1"
-                class="text-center text-16 text-md-20"
+                class="text-center text-16 text-lg-20"
               >
                 로그인
               </b-card-title>
@@ -22,7 +22,7 @@
             <b-card-body>
               <b-form @submit.prevent="login">
                 <div class="mb-4">
-                  <label for="email" class="text-16 text-md-18 fw-700 mb-1"
+                  <label for="email" class="text-16 text-lg-18 fw-700 mb-1"
                     >이메일</label
                   >
                   <b-form-input
@@ -35,7 +35,7 @@
                   </b-form-input>
                 </div>
                 <div class="mb-4">
-                  <label for="pwd" class="text-16 text-md-18 fw-700 mb-1"
+                  <label for="pwd" class="text-16 text-lg-18 fw-700 mb-1"
                     >비밀번호</label
                   >
                   <b-form-input

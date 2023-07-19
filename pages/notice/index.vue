@@ -1,8 +1,8 @@
 <template>
-  <b-container fluid class="my-5">
+  <div>
     <!-- 공지사항 -->
     <div class="mb-5">
-      <header-underbar title="공지사항" id="notice" variant="sub-2" />
+      <!-- <header-underbar title="공지사항" id="notice" variant="sub-2" /> -->
       <section class="mt-3">
         <template v-if="pending.items">
           <Loading />
@@ -23,7 +23,7 @@
                 >
                   <b-row class="py-3">
                     <b-col cols="2">
-                      <strong class="text-15 text-md-20 fw-700 text-uppercase">
+                      <strong class="text-15 text-lg-20 fw-700 text-uppercase">
                         {{ item.type }}
                       </strong>
                     </b-col>
@@ -33,7 +33,7 @@
                         variant="text p-0 d-flex align-items-start"
                         v-b-toggle="`notice-${i}`"
                       >
-                        <span class="fw-700 text-15 text-md-20">
+                        <span class="fw-700 text-15 text-lg-20">
                           {{ item.title }}
                         </span>
                       </b-btn>
@@ -48,7 +48,7 @@
                     <div class="p-3 bg-gray-200">
                       <b-row>
                         <b-col cols="10" offset="2">
-                          <p class="text-15 text-md-20">
+                          <p class="text-15 text-lg-20">
                             {{ item.content }}
                           </p>
                         </b-col>
@@ -64,7 +64,7 @@
     </div>
     <!-- faq -->
     <div class="mb-5">
-      <header-underbar title="자주 묻는 질문" id="faqs" variant="sub-2" />
+      <!-- <header-underbar title="자주 묻는 질문" id="faqs" variant="sub-2" /> -->
       <section class="mt-3">
         <template v-if="pending.items">
           <Loading />
@@ -85,7 +85,7 @@
                 >
                   <b-row class="py-3">
                     <b-col cols="2">
-                      <strong class="text-15 text-md-20 fw-700 text-uppercase">
+                      <strong class="text-15 text-lg-20 fw-700 text-uppercase">
                         {{ item.type }}
                       </strong>
                     </b-col>
@@ -95,7 +95,7 @@
                         variant="text p-0 d-flex align-items-start"
                         v-b-toggle="`faq-${i}`"
                       >
-                        <span class="fw-700 text-15 text-md-20">
+                        <span class="fw-700 text-15 text-lg-20">
                           {{ item.title }}
                         </span>
                       </b-btn>
@@ -106,7 +106,7 @@
                     <div class="p-3 bg-gray-200">
                       <b-row>
                         <b-col cols="10" offset="2">
-                          <p class="text-15 text-md-20">
+                          <p class="text-15 text-lg-20">
                             {{ item.content }}
                           </p>
                         </b-col>
@@ -120,13 +120,12 @@
         </template>
       </section>
     </div>
-  </b-container>
+  </div>
 </template>
 
 <script>
 export default {
-  layout: "default",
-
+  layout: "detail",
   async asyncData({ app, $firebase, query }) {
     // const { category } = query;
     // if (!category) app.router.push("/");

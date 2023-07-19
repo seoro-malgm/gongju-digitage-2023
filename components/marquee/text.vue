@@ -6,7 +6,7 @@
       :style="{ transform: `translate(-${x}px, -50%)` }"
     >
       <div
-        class="text mr-5 text-nowrap text-32 text-md-40"
+        class="text mr-5 text-nowrap text-32 text-lg-40"
         :class="`text-${variant}`"
         v-for="i in 50"
         :key="i"

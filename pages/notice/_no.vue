@@ -15,7 +15,7 @@
             :disabled="!auth"
             @click="likeToggle"
           >
-            <i class="icon icon-heart text-16 text-md-20 mr-3" />
+            <i class="icon icon-heart text-16 text-lg-20 mr-3" />
             <span class="text-16 fw-700">
               {{ currentBoardItem?.like }}
             </span>

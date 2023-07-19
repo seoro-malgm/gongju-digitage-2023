@@ -3,7 +3,7 @@
     <section class="bg-gray-300 py-5 min-vh-100">
       <b-container class="mb-5 py-5">
         <header class="pb-4 text-center">
-          <h2 class="text-36 text-md-48 text-lg-56 underbar">
+          <h2 class="text-36 text-lg-48 text-lg-56 underbar">
             사전등록 예약 확인하기
           </h2>
         </header>
@@ -60,7 +60,7 @@
       @click="$router.push('/pre-register')"
     >
       <template #content>
-        <span class="mx-1 fw-700 text-15 text-md-16">사전등록 하러가기 </span>
+        <span class="mx-1 fw-700 text-15 text-lg-16">사전등록 하러가기 </span>
         <i class="icon icon-right-big" />
       </template>
     </btn-floating>

@@ -1,5 +1,5 @@
 <template>
-  <div>관람안내</div>
+  <div>전시연혁</div>
 </template>
 
 <script>

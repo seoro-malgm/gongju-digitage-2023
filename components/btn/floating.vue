@@ -37,12 +37,15 @@ export default {
   z-index: 1055;
   transition: all 0.2s $default-ease;
   .btn {
-    border-radius: 40rem;
     font-size: 1.15rem;
     padding: 0.75rem 1.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 0;
+    &:hover {
+      color: $gray-700;
+    }
   }
 }
 </style>

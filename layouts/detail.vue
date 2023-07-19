@@ -3,47 +3,72 @@
     <global-nav :onScrolled="onScrolled" :auth="auth" />
     <!-- 내용 -->
     <main id="main" :class="{ 'is-main': path === '/' }">
-      <!-- <transition> -->
-      <NuxtChild :scrollY="scrollY" :onScrolled="onScrolled" />
-      <!-- </transition> -->
+      <header class="detail-header">
+        <small class="text-11 text-lg-13 mt-auto"
+          >Dive into Digital Heritage</small
+        >
+        <h2 class="text-20 text-lg-48 lh-125">
+          <!-- {{ routeMeta?.title }} -->
+          전시소개
+        </h2>
+        <b-container class="my-4 my-lg-5 d-flex justify-content-end">
+          <!-- <b-breadcrumb
+            :items="currentBreadcrumb"
+            class="mb-0 breadcrumb-lnb"
+          /> -->
+        </b-container>
+      </header>
+      <!-- lnb -->
+      <nav class="local-nav"></nav>
+      <!-- content -->
+      <b-container class="py-3">
+        {{ pageData?.pageTitle }}
+        <!-- {{ routes }} -->
+        <NuxtChild :scrollY="scrollY" :onScrolled="onScrolled" />
+      </b-container>
     </main>
-    <!-- <btn-floating
-      :position="{
-        bottom: onScrolled ? '2.5rem' : '-4rem',
-        right: '1.5rem',
-      }"
-      variant="outline-gray-600 bg-white"
-      @click="scrollTo(0, 0)"
-    >
-      <template #content>
-        <i class="icon icon-up-big d-block" />
-        <span class="mx-1 fw-700 text-15 text-lg-16"> TOP </span>
-      </template>
-    </btn-floating> -->
 
-    <!-- footer -->
     <global-footer />
   </div>
 </template>
 
 <script>
+import routes from "@/assets/json/routes";
 export default {
-  name: "default",
+  name: "detail",
   data() {
     return {
       scrollY: 0,
       onScrolled: false,
+      routes,
     };
   },
+
   computed: {
     auth() {
       return this.$store.getters.getUser;
     },
     path() {
-      return this.$route.path;
+      return this.$route?.name?.split("-");
     },
     routeName() {
       return this.$route.name;
+    },
+    currentBreadcrumb() {
+      return [
+        {
+          text: "home",
+          href: "/",
+        },
+        {
+          text: "전시개요",
+          href: "/about/outline",
+        },
+        {
+          text: "전시연혁",
+          href: "/about/history",
+        },
+      ];
     },
   },
   mounted() {
@@ -192,6 +217,18 @@ export default {
   }
   &.is-main {
     padding-top: 0;
+  }
+  .detail-header {
+    background-color: $primary;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: $white;
+    min-height: 240px;
+    @media (min-width: $breakpoint-lg) {
+      min-height: 320px;
+    }
   }
 }
 </style>

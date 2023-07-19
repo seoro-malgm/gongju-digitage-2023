@@ -1,6 +1,6 @@
 <template>
   <div class="py-3 text-center">
-    <small class="text-15 text-md-16">{{ text }}</small>
+    <small class="text-15 text-lg-16">{{ text }}</small>
   </div>
 </template>
 

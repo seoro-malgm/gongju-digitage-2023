@@ -37,7 +37,7 @@ body {
   scroll-behavior: smooth;
   * {
     &::selection {
-      background-color: $primary;
+      background-color: $sub-3;
       color: white;
     }
   }
@@ -119,22 +119,6 @@ textarea {
     margin-top: 132px;
     margin-bottom: 132px;
   }
-}
-
-// .waves-wrapper {
-//   max-height: 658px;
-//   overflow-y: auto;
-//   overflow-x: hidden;
-// }
-.section-header {
-  padding-top: 8px;
-  margin-top: 8px;
-  padding-bottom: 8px;
-  margin-bottom: 8px;
-  display: flex;
-  align-items: center;
-  // justify-content: center;
-  justify-content: space-between;
 }
 
 .bg-flow {
@@ -319,4 +303,8 @@ ul.list-styled {
       transform: translateX(6px);
     }
   }
+}
+
+.breadcrumb-lnb {
+  background-color: none;
 }

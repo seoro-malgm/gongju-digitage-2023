@@ -7,14 +7,14 @@
         ...actionWrapStyles,
       }"
     >
-      <h1 class="text-100 text-md-120 text-lg-160 text-xl-240 fw-900 lh-80">
+      <h1 class="text-100 text-lg-120 text-lg-160 text-xl-240 fw-900 lh-80">
         <span class="word" :class="{ shown: scrollY >= 0 }"> DIVE <br /> </span>
         <span class="word" :class="{ shown: scrollY >= 100 }"> into</span>
       </h1>
       <div class="">
         <div class="letter">
           <h1
-            class="text-100 text-md-120 text-lg-160 text-xl-240 fw-900 lh-80"
+            class="text-100 text-lg-120 text-lg-160 text-xl-240 fw-900 lh-80"
             :style="{
               backgroundImage: `url(${require(`@/assets/snapshot/snapshot_${index}.png`)})`,
               backgroundColor: 'black',

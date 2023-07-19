@@ -1,5 +1,5 @@
 <template>
-  <div>관람안내</div>
+  <div>전시구성</div>
 </template>
 
 <script>

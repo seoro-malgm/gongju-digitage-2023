@@ -3,14 +3,14 @@
     <section class="bg-gray-300 py-5 min-vh-100">
       <b-container class="mb-5 py-5">
         <header class="pb-4 text-center">
-          <h2 class="text-36 text-md-48 text-lg-56 underbar">예약확인</h2>
+          <h2 class="text-36 text-lg-48 text-lg-56 underbar">예약확인</h2>
         </header>
         <b-row align-h="center">
           <b-col cols="11" md="10">
             <div
               class="my-5 text-center py-3 border-top border-bottom border-black"
             >
-              <ul class="text-15 text-md-20">
+              <ul class="text-15 text-lg-20">
                 <li class="d-flex align-items-start mb-2">
                   <span class="mr-2">이름</span>
                   <strong>OOO</strong>
@@ -20,7 +20,7 @@
                   <strong>OOO-000-0000</strong>
                 </li>
                 <li
-                  class="d-flex flex-column flex-md-row align-items-start mb-2"
+                  class="d-flex flex-column flex-lg-row align-items-start mb-2"
                 >
                   <span class="mr-2">신청 프로그램 </span>
                   <strong class="text-left">

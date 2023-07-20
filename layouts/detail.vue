@@ -3,27 +3,43 @@
     <global-nav :onScrolled="onScrolled" :auth="auth" />
     <!-- 내용 -->
     <main id="main" :class="{ 'is-main': path === '/' }">
-      <header class="detail-header">
-        <small class="text-11 text-lg-13 mt-auto"
+      <header
+        class="detail-header"
+        :style="{
+          backgroundImage: `url(${require('@/assets/images/pattern_0.png')})`,
+        }"
+      >
+        <small class="text-13 text-lg-14 my-0 mt-lg-auto mb-lg-0"
           >Dive into Digital Heritage</small
         >
-        <h2 class="text-20 text-lg-48 lh-125">
+        <h2 class="text-30 text-lg-48 lh-125">
+          <template v-if="routes && path?.length">
+            {{ routes[path[0]] }}
+          </template>
+          <template v-else> - </template>
           <!-- {{ routeMeta?.title }} -->
-          전시소개
         </h2>
-        <b-container class="my-4 my-lg-5 d-flex justify-content-end">
-          <!-- <b-breadcrumb
-            :items="currentBreadcrumb"
-            class="mb-0 breadcrumb-lnb"
-          /> -->
+        <b-container class="my-4 my-lg-5 d-none d-lg-flex justify-content-end">
+          <b-breadcrumb class="mb-0">
+            <b-breadcrumb-item
+              :href="item.href"
+              v-for="(item, i) in currentBreadcrumb"
+              :key="i"
+            >
+              <template v-if="item?.text === '홈'">
+                <i class="icon icon-home" />
+              </template>
+              <template v-else>
+                {{ item.text }}
+              </template>
+            </b-breadcrumb-item>
+          </b-breadcrumb>
         </b-container>
       </header>
       <!-- lnb -->
       <nav class="local-nav"></nav>
       <!-- content -->
       <b-container class="py-3">
-        {{ pageData?.pageTitle }}
-        <!-- {{ routes }} -->
         <NuxtChild :scrollY="scrollY" :onScrolled="onScrolled" />
       </b-container>
     </main>
@@ -43,7 +59,6 @@ export default {
       routes,
     };
   },
-
   computed: {
     auth() {
       return this.$store.getters.getUser;
@@ -51,24 +66,16 @@ export default {
     path() {
       return this.$route?.name?.split("-");
     },
-    routeName() {
-      return this.$route.name;
-    },
+
     currentBreadcrumb() {
-      return [
-        {
-          text: "home",
-          href: "/",
-        },
-        {
-          text: "전시개요",
-          href: "/about/outline",
-        },
-        {
-          text: "전시연혁",
-          href: "/about/history",
-        },
-      ];
+      const routePath = this.$route.path;
+      const paths = routePath.split("/").filter(Boolean);
+      const breadcrumb = paths.map((path, index) => ({
+        text: this.routes[path],
+        href: `/${paths.slice(0, index + 1).join("/")}`,
+      }));
+      breadcrumb.unshift({ text: "홈", href: "/" });
+      return breadcrumb;
     },
   },
   mounted() {
@@ -225,7 +232,9 @@ export default {
     align-items: center;
     justify-content: center;
     color: $white;
-    min-height: 240px;
+    background-position: center center;
+    background-size: cover;
+    min-height: 200px;
     @media (min-width: $breakpoint-lg) {
       min-height: 320px;
     }

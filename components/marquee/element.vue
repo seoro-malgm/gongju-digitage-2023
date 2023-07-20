@@ -1,18 +1,13 @@
 <template>
-  <div class="marquee-wrap">
+  <div class="marquee-wrap" :style="{ minHeight: `${height}px` }">
     <div
       class="marquee"
-      v-if="text"
-      :style="{ transform: `translate(-${x}px, -50%)` }"
+      :style="{
+        transform: `translate(${x * (reverse ? 1 : -1)}px, -50%)`,
+        marginLeft: reverse ? '-100vw' : '0',
+      }"
     >
-      <div
-        class="text mr-5 text-nowrap text-32 text-lg-40"
-        :class="`text-${variant}`"
-        v-for="i in 50"
-        :key="i"
-      >
-        {{ text }}
-      </div>
+      <slot></slot>
     </div>
   </div>
 </template>
@@ -20,13 +15,17 @@
 <script>
 export default {
   props: {
-    text: {
-      type: String,
-      default: null,
+    height: {
+      type: Number,
+      default: 320,
     },
-    variant: {
-      type: String,
-      default: "black",
+    speed: {
+      type: Number,
+      default: 1,
+    },
+    reverse: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {
@@ -50,7 +49,7 @@ export default {
     async init() {
       this.interval = setInterval(() => {
         // console.log(this.bars);
-        this.x += 1;
+        this.x += this.speed;
       }, 10);
     },
   },
@@ -59,10 +58,11 @@ export default {
 
 <style lang="scss" scoped>
 .marquee-wrap {
-  padding: 1rem 0 2rem 1rem;
-  border-top: 1px solid black;
-  border-bottom: 1px solid black;
-  overflow: hidden;
+  width: 100%;
+  &::-webkit-scrollbar,
+  &::-webkit-scrollbar-track {
+    display: none;
+  }
   position: relative;
   .marquee {
     position: absolute;
@@ -70,9 +70,6 @@ export default {
     top: 50%;
     left: 0;
     display: inline-flex;
-    .text {
-      transition: color 0.5s $default-ease;
-    }
   }
 }
 </style>

@@ -305,6 +305,22 @@ ul.list-styled {
   }
 }
 
-.breadcrumb-lnb {
-  background-color: none;
+.breadcrumb {
+  background-color: transparent;
+  .breadcrumb-item {
+    &:not(:first-child) {
+      &:before {
+        content: ">";
+        color: white;
+      }
+    }
+  }
+}
+
+a:link,
+a:visited,
+a:active,
+a:hover {
+  text-decoration: none;
+  color: inherit;
 }

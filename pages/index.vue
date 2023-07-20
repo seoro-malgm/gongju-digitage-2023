@@ -6,10 +6,16 @@
         class="min-vh-100 d-flex align-items-center justify-content-around"
       >
         <b-row class="w-100">
-          <b-col cols="12" md="6">
+          <b-col cols="9" md="5">
             <div class="d-flex flex-column">
               <h3 class="text-sub-2 text-20 text-lg-32">2023</h3>
-              <h1 class="my-3 my-lg-4">디지털유산전 로고</h1>
+              <h1 class="my-3 my-lg-4">
+                <img
+                  class="w-100"
+                  :src="require('@/assets/lettertype-vertical.svg')"
+                  alt="디지털 유산전"
+                />
+              </h1>
               <h2 class="text-sub-2 text-20 text-lg-36">
                 2023.10.06(금)-08(일)
               </h2>
@@ -40,45 +46,47 @@
               :class="{ active: programIndex === i }"
               @mouseenter="programIndex = i"
             >
-              <div
-                class="column-content p-3 d-flex flex-column justify-content-between h-100"
-              >
-                <div class="on-active">
-                  <header
-                    class="d-flex flex-column justify-content-between p-0 p-lg-3"
-                  >
-                    <small class="text-16 text-lg-18 mb-2 mb-lg-4"
-                      >미래교육</small
-                    >
-                    <h5 class="text-24 text-lg-28 mb-auto lh-125">
-                      미래미래미래에는 어떤 교육을 하게 될까? 미래미래미래에는
-                      어떤 교육을 하게 될까?
-                    </h5>
-                  </header>
-                </div>
-                <div class="on-default">
-                  <!-- <div class="d-flex align-items-center"> -->
-                  <figure
-                    class="bg-black mb-3 mx-auto d-none d-lg-block"
-                    :style="{ width: '40px', height: '40px' }"
-                  ></figure>
-                  <div class="text mb-3 lh-120 mx-lg-auto">
-                    <small class="text-13 text-lg-14 mb-2 mb-lg-3"
-                      >미래교육</small
-                    >
-                    <h5 class="text-14 text-lg-15 mb-auto">
-                      미래미래미래에는 어떤 교육을 하게 될까?
-                    </h5>
-                  </div>
-                  <!-- </div> -->
-                </div>
-                <!-- footer -->
+              <router-link to="/program">
                 <div
-                  class="column-footer mt-auto mb-0 fw-700 text-15 text-lg-18"
+                  class="column-content p-3 d-flex flex-column justify-content-between h-100"
                 >
-                  0{{ i + 1 }}
+                  <div class="on-active">
+                    <header
+                      class="d-flex flex-column justify-content-between p-0 p-lg-3"
+                    >
+                      <small class="text-16 text-lg-18 mb-2 mb-lg-4"
+                        >미래교육</small
+                      >
+                      <h5 class="text-24 text-lg-28 mb-auto lh-125">
+                        미래미래미래에는 어떤 교육을 하게 될까? 미래미래미래에는
+                        어떤 교육을 하게 될까?
+                      </h5>
+                    </header>
+                  </div>
+                  <div class="on-default">
+                    <!-- <div class="d-flex align-items-center"> -->
+                    <figure
+                      class="bg-black mb-3 mx-auto d-none d-lg-block"
+                      :style="{ width: '40px', height: '40px' }"
+                    ></figure>
+                    <div class="text mb-3 lh-120 mx-lg-auto">
+                      <small class="text-13 text-lg-14 mb-2 mb-lg-3"
+                        >미래교육</small
+                      >
+                      <h5 class="text-14 text-lg-15 mb-auto">
+                        미래미래미래에는 어떤 교육을 하게 될까?
+                      </h5>
+                    </div>
+                    <!-- </div> -->
+                  </div>
+                  <!-- footer -->
+                  <div
+                    class="column-footer mt-auto mb-0 fw-700 text-15 text-lg-18"
+                  >
+                    0{{ i + 1 }}
+                  </div>
                 </div>
-              </div>
+              </router-link>
             </b-col>
           </b-row>
         </div>
@@ -95,16 +103,24 @@
         />
       </b-container>
       <div class="mt-4 mt-lg-5">
-        <ul class="list-archive mb-3">
-          <li v-for="(item, i) in 10" :key="i" class="archive-item">
-            <figure class="bg-img ratio-67 bg-white"></figure>
-          </li>
-        </ul>
-        <ul class="list-archive mb-3">
-          <li v-for="(item, i) in 10" :key="i" class="archive-item">
-            <figure class="bg-img ratio-67 bg-white"></figure>
-          </li>
-        </ul>
+        <marquee-element :height="220" class="mb-4" :speed="0.3">
+          <ul class="list-archive mb-3">
+            <li v-for="(item, i) in 10" :key="i" class="archive-item">
+              <router-link to="/archive">
+                <figure class="bg-img ratio-67 bg-white cursor-pointer" />
+              </router-link>
+            </li>
+          </ul>
+        </marquee-element>
+        <marquee-element :height="220" :reverse="true" :speed="0.3">
+          <ul class="list-archive mb-3">
+            <li v-for="(item, i) in 10" :key="i" class="archive-item">
+              <router-link to="/archive">
+                <figure class="bg-img ratio-67 bg-white cursor-pointer" />
+              </router-link>
+            </li>
+          </ul>
+        </marquee-element>
       </div>
     </section>
     <!-- 공지사항 -->
@@ -269,6 +285,7 @@ section.program {
   .program-column {
     transition: all 0.3s $default-ease;
     cursor: pointer;
+
     .column-content {
       transition: all 0.3s $default-ease;
       border-radius: 15px;
@@ -313,12 +330,9 @@ section.archive {
   .list-archive {
     display: flex;
     align-items: center;
-    overflow: auto;
+    width: 100%;
+    // overflow: auto;
     padding: 0 20px;
-    &::-webkit-scrollbar,
-    &::-webkit-scrollbar-track {
-      display: none;
-    }
     .archive-item {
       flex: 0 0 330px;
       max-width: 330px;

@@ -8,7 +8,7 @@
 export default {
   layout: "detail",
   mounted() {
-    this.$router.push("/about/info");
+    this.$router.push("/about/overview");
   },
 };
 </script>

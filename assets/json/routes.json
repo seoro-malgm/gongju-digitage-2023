@@ -1,8 +1,11 @@
 {
-  "about": {
-    "about": "전시소개",
-    "info": "전시개요",
-    "history": "전시연혁",
-    "composition": "전시개요"
-  }
+  "about": "전시소개",
+  "overview": "전시개요",
+  "history": "전시연혁",
+  "composition": "전시구성",
+  "program": "프로그램",
+  "archive": "아카이빙",
+  "conference": "컨퍼런스",
+  "info": "관람안내",
+  "notice": "공지사항"
 }

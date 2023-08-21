@@ -1,5 +1,7 @@
 <template>
-  <div>프로그램</div>
+  <div class="my-5 py-5">
+    <img :src="require('@/assets/images/beta_image.png')" alt="" />
+  </div>
 </template>
 
 <script>

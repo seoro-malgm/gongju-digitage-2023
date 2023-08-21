@@ -1,5 +1,7 @@
 <template>
-  <div class="loading-wrapper">...</div>
+  <div class="loading-wrapper p-4 text-center">
+    <b-spinner />
+  </div>
 </template>
 
 <script>

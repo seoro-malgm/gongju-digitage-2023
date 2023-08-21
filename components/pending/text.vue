@@ -1,6 +1,9 @@
 <template>
-  <div class="py-3 text-center">
-    <small class="text-15 text-lg-16">{{ text }}</small>
+  <div class="px-1 py-5 text-center">
+    <b-spinner variant="sub-2" />
+    <small class="d-block mt-3 text-15 text-lg-16 text-gray-600">
+      {{ text }}
+    </small>
   </div>
 </template>
 
@@ -9,7 +12,7 @@ export default {
   props: {
     text: {
       type: String,
-      default: "7월 중 오픈 예정",
+      default: "준비중입니다",
     },
   },
 };

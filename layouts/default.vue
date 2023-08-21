@@ -1,13 +1,25 @@
 <template>
   <div id="app">
-    <global-nav :onScrolled="onScrolled" :auth="auth" />
-    <!-- 내용 -->
-    <main id="main" :class="{ 'is-main': path === '/' }">
-      <!-- <transition> -->
-      <NuxtChild :scrollY="scrollY" :onScrolled="onScrolled" />
-      <!-- </transition> -->
-    </main>
-    <!-- <btn-floating
+    <template v-if="isBeta">
+      <div
+        class="min-vh-100 d-flex flex-column align-items-center justify-content-center"
+      >
+        <b-row align-v="center" align-h="center">
+          <b-col cols="12" md="9" class="m-auto">
+            <img :src="require('@/assets/images/beta_image.png')" alt="" />
+          </b-col>
+        </b-row>
+      </div>
+    </template>
+    <template v-else>
+      <global-nav :onScrolled="onScrolled" :auth="auth" />
+      <!-- 내용 -->
+      <main id="main" :class="{ 'is-main': path === '/' }">
+        <!-- <transition> -->
+        <NuxtChild :scrollY="scrollY" :onScrolled="onScrolled" />
+        <!-- </transition> -->
+      </main>
+      <!-- <btn-floating
       :position="{
         bottom: onScrolled ? '2.5rem' : '-4rem',
         right: '1.5rem',
@@ -21,8 +33,9 @@
       </template>
     </btn-floating> -->
 
-    <!-- footer -->
-    <global-footer />
+      <!-- footer -->
+      <global-footer />
+    </template>
   </div>
 </template>
 
@@ -33,6 +46,7 @@ export default {
     return {
       scrollY: 0,
       onScrolled: false,
+      isBeta: false,
     };
   },
   computed: {

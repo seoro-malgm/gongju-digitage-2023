@@ -102,26 +102,42 @@
           class="mb-4 mb-lg-5"
         />
       </b-container>
-      <div class="mt-4 mt-lg-5">
-        <marquee-element :height="220" class="mb-4" :speed="0.3">
-          <ul class="list-archive mb-3">
-            <li v-for="(item, i) in 10" :key="i" class="archive-item">
-              <router-link to="/archive">
-                <figure class="bg-img ratio-67 bg-white cursor-pointer" />
-              </router-link>
-            </li>
-          </ul>
-        </marquee-element>
-        <marquee-element :height="220" :reverse="true" :speed="0.3">
-          <ul class="list-archive mb-3">
-            <li v-for="(item, i) in 10" :key="i" class="archive-item">
-              <router-link to="/archive">
-                <figure class="bg-img ratio-67 bg-white cursor-pointer" />
-              </router-link>
-            </li>
-          </ul>
-        </marquee-element>
-      </div>
+      <client-only>
+        <div class="mt-4 mt-lg-5" v-if="archiveImages?.length">
+          <marquee-element :height="220" class="mb-4" :speed="0.3">
+            <ul class="list-archive mb-3">
+              <li
+                v-for="(item, i) in archiveImages"
+                :key="i"
+                class="archive-item"
+              >
+                <router-link to="/archive">
+                  <figure
+                    class="bg-img ratio-67 cursor-pointer"
+                    :style="{ backgroundImage: `url(${item})` }"
+                  />
+                </router-link>
+              </li>
+            </ul>
+          </marquee-element>
+          <marquee-element :height="220" :reverse="true" :speed="0.3">
+            <ul class="list-archive mb-3">
+              <li
+                v-for="(item, i) in archiveImages"
+                :key="i"
+                class="archive-item"
+              >
+                <router-link to="/archive">
+                  <figure
+                    class="bg-img ratio-67 cursor-pointer"
+                    :style="{ backgroundImage: `url(${item})` }"
+                  />
+                </router-link>
+              </li>
+            </ul>
+          </marquee-element>
+        </div>
+      </client-only>
     </section>
     <!-- 공지사항 -->
     <section class="notice py-5">
@@ -253,6 +269,8 @@
 </template>
 
 <script>
+import archives from "@/data/archive/index.json";
+
 export default {
   layout: "default",
   components: {},
@@ -275,7 +293,28 @@ export default {
     return {
       programIndex: 0,
       snsTabIndex: 0,
+      archives,
     };
+  },
+  computed: {
+    archiveImages() {
+      let result = [];
+      for (const [year, value] of Object.entries(this.archives)) {
+        const { data } = value;
+        if (data?.length) {
+          for (let i = 0; i < data.length; i++) {
+            const { key, sources } = data[i];
+            if (sources?.length) {
+              for (let l = 0; l < sources.length; l++) {
+                const source = sources[l];
+                result.push(require(`@/data/archive/${year}/${key}/${source}`));
+              }
+            }
+          }
+        }
+      }
+      return result;
+    },
   },
 };
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div
+    <!-- <div
       class="action-wrap text-center"
       v-if="!hidden"
       :style="{
@@ -30,11 +30,10 @@
               HERITAGE
             </span>
           </h1>
-          <!-- <div class="content"></div> -->
         </div>
       </div>
     </div>
-    <div id="intro-interaction" />
+    <div id="intro-interaction" /> -->
   </div>
 </template>
 

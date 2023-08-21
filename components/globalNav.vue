@@ -103,7 +103,7 @@ export default {
   padding: 0;
   position: fixed;
   left: 0;
-  z-index: 3000;
+  z-index: 1000;
   background-color: white;
   // background-color: rgba($color: #fff, $alpha: 0.3);
   // backdrop-filter: blur(6px);

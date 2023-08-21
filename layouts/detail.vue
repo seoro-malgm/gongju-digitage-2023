@@ -2,25 +2,25 @@
   <div id="app">
     <global-nav :onScrolled="onScrolled" :auth="auth" />
     <!-- 내용 -->
-    <main id="main" :class="{ 'is-main': path === '/' }">
+    <main id="main">
       <header
         class="detail-header"
         :style="{
           backgroundImage: `url(${require('@/assets/images/pattern_0.png')})`,
         }"
       >
-        <small class="text-13 text-lg-14 my-0 mt-lg-auto mb-lg-0"
-          >Dive into Digital Heritage</small
-        >
+        <small class="text-13 text-lg-14 my-0 mt-lg-auto mb-lg-0">
+          Dive into Digital Heritage
+        </small>
         <h2 class="text-30 text-lg-48 lh-125">
-          <template v-if="routes && path?.length">
-            {{ routes[path[0]] }}
+          <template v-if="routeTitle">
+            {{ routeTitle }}
           </template>
           <template v-else> - </template>
           <!-- {{ routeMeta?.title }} -->
         </h2>
-        <b-container class="my-4 my-lg-5 d-none d-lg-flex justify-content-end">
-          <b-breadcrumb class="mb-0">
+        <b-container class="mt-auto mb-4 d-none d-lg-flex justify-content-end">
+          <b-breadcrumb>
             <b-breadcrumb-item
               :href="item.href"
               v-for="(item, i) in currentBreadcrumb"
@@ -37,13 +37,32 @@
         </b-container>
       </header>
       <!-- lnb -->
-      <nav class="local-nav"></nav>
+      <nav class="detail-local-nav pt-3 pt-lg-4" v-if="currentLnb?.length">
+        <b-container>
+          <b-row
+            tag="ul"
+            class="nav-list mx-lg-n5"
+            align-h="center"
+            align-v="center"
+          >
+            <b-col
+              tag="li"
+              class="nav-item text-center px-lg-5"
+              v-for="(item, i) in currentLnb"
+              :key="i"
+            >
+              <router-link class="nav-link text-14 text-lg-16" :to="item.href">
+                {{ item.text }}
+              </router-link>
+            </b-col>
+          </b-row>
+        </b-container>
+      </nav>
       <!-- content -->
       <b-container class="py-3">
         <NuxtChild :scrollY="scrollY" :onScrolled="onScrolled" />
       </b-container>
     </main>
-
     <global-footer />
   </div>
 </template>
@@ -64,9 +83,14 @@ export default {
       return this.$store.getters.getUser;
     },
     path() {
-      return this.$route?.name?.split("-");
+      const p = this.$route?.name?.split("-");
+      return p;
     },
-
+    routeTitle() {
+      const path = this.$route?.name?.split("-");
+      return this.routes[path[path?.length - 1]];
+    },
+    // 링크 순서
     currentBreadcrumb() {
       const routePath = this.$route.path;
       const paths = routePath.split("/").filter(Boolean);
@@ -76,6 +100,21 @@ export default {
       }));
       breadcrumb.unshift({ text: "홈", href: "/" });
       return breadcrumb;
+    },
+    // lnb
+    currentLnb() {
+      const routePath = this.$route.path;
+      const parent = routePath.split("/").filter(Boolean)[0];
+      const { children } = this.routes;
+      const lnb = children[parent];
+      return lnb?.length
+        ? lnb.map((key, index) => {
+            return {
+              text: this.routes[key],
+              href: `/${parent}/${key}`,
+            };
+          })
+        : [];
     },
   },
   mounted() {
@@ -222,9 +261,7 @@ export default {
   @media (min-width: $breakpoint-lg) {
     padding-top: 108px;
   }
-  &.is-main {
-    padding-top: 0;
-  }
+
   .detail-header {
     background-color: $primary;
     display: flex;
@@ -236,7 +273,7 @@ export default {
     background-size: cover;
     min-height: 200px;
     @media (min-width: $breakpoint-lg) {
-      min-height: 320px;
+      min-height: 300px;
     }
   }
 }

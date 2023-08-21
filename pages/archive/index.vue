@@ -1,10 +1,13 @@
 <template>
-  <div>아카이빙</div>
+  <div></div>
 </template>
 
 <script>
 export default {
   layout: "detail",
+  mounted() {
+    this.$router.push("/archive/2021");
+  },
 };
 </script>
 

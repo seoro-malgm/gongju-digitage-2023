@@ -7,5 +7,17 @@
   "archive": "아카이빙",
   "conference": "컨퍼런스",
   "info": "관람안내",
-  "notice": "공지사항"
+  "notice": "공지사항",
+  "layouts": "전시배치",
+  "companies": "참여업체",
+  "archiveYear": "아카이빙",
+  "2021": "2021",
+  "2022": "2022",
+  "news": "새소식",
+  "faq": "FAQ",
+  "children": {
+    "about": ["overview", "history", "composition"],
+    "archive": ["2021", "2022"],
+    "notice": ["news", "faq"]
+  }
 }

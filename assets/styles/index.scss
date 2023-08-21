@@ -113,11 +113,11 @@ textarea {
 }
 // 섹션끼리의 갭
 .section-gap {
-  margin-top: 96px;
-  margin-bottom: 96px;
-  @media (min-width: 992px) {
-    margin-top: 132px;
-    margin-bottom: 132px;
+  margin-top: 112px;
+  margin-bottom: 112px;
+  @media (min-width: $breakpoint-lg) {
+    margin-top: 150px;
+    margin-bottom: 150px;
   }
 }
 
@@ -307,11 +307,27 @@ ul.list-styled {
 
 .breadcrumb {
   background-color: transparent;
+  margin: 0;
+  padding: 0;
   .breadcrumb-item {
     &:not(:first-child) {
       &:before {
         content: ">";
         color: white;
+      }
+    }
+  }
+}
+.detail-local-nav {
+  border-bottom: 2px solid rgba($color: #000000, $alpha: 0.4);
+  .nav-list {
+    .nav-item {
+      .nav-link {
+        border-bottom: 5px solid transparent;
+        font-weight: 600;
+        &.nuxt-link-active {
+          border-bottom-color: $primary;
+        }
       }
     }
   }
@@ -323,4 +339,29 @@ a:active,
 a:hover {
   text-decoration: none;
   color: inherit;
+}
+
+br {
+  display: none;
+  @media (min-width: $breakpoint-lg) {
+    display: block;
+  }
+}
+
+.sub-nav {
+  .sub-links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .sub-link-item {
+      padding: 0 0.5rem;
+      margin: 0 0.25rem;
+      .sub-link {
+        padding: 0;
+        &.nuxt-link-exact-active {
+          font-weight: 700;
+        }
+      }
+    }
+  }
 }

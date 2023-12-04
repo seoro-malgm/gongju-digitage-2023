@@ -4,8 +4,8 @@
       <b-row class="min-vh-100 mx-0" align-v="stretch">
         <b-col cols="1" class="sidebar px-0">
           <header class="sidebar-header">
-            <!-- <img :src="require('@/assets/logo-ko.svg')" alt="" /> -->
-            <h1 class="text-14 text-lg-16 fw-700 mt-3">관리자페이지</h1>
+            <img :src="require('@/assets/logo.png')" alt="" />
+            <h1 class="text-14 text-md-16 fw-700 mt-3">관리자페이지</h1>
           </header>
           <section class="sidebar-body">
             <template v-if="!auth"> </template>
@@ -68,7 +68,7 @@
         <b-col cols="11" offset="1" class="content px-0">
           <div class="content-body">
             <header class="pt-2 pb-3">
-              <h1 class="text-18 text-lg-20">{{ pathTitle }}</h1>
+              <h1 class="text-18 text-md-20">{{ pathTitle }}</h1>
             </header>
             <section>
               <nuxt-child :auth="auth" />
@@ -101,86 +101,33 @@ export default {
           name: "메인 관리",
           path: "main",
         },
-        // {
-        //   name: "공지사항",
-        //   path: "notice",
-        // },
-        // {
-        //   name: "물품",
-        //   path: "products",
-        //   children: [
-        //     {
-        //       name: "발주 관리",
-        //       path: "list",
-        //     },
-        //     {
-        //       name: "물품 상세 관리",
-        //       path: "write",
-        //       hidden: true,
-        //     },
-        //   ],
-        // },
         {
-          name: "메뉴",
-          path: "menu",
+          name: "공지사항",
+          path: "notice",
           children: [
             {
-              name: "원재료 관리",
-              path: "material",
-            },
-            {
-              name: "메뉴 구성 관리",
+              name: "공지사항 목록",
               path: "list",
             },
-
             {
-              name: "메뉴 상세 관리",
+              name: "공지사항 상세 관리",
               path: "write",
               hidden: true,
             },
-            {
-              name: "레시피 관리",
-              path: "recipe",
-              hidden: true,
-            },
-            // {
-            //   name: "메뉴판 관리",
-            //   path: "board",
-            // },
           ],
         },
-
-        // {
-        //   name: "샵 관리",
-        //   path: "shop",
-        //   children: [
-        //     {
-        //       name: "상품 관리",
-        //       path: "list",
-        //     },
-        //     {
-        //       name: "상품 상세 관리",
-        //       path: "write",
-        //       hidden: true,
-        //     },
-        //   ],
-        // },
         {
-          name: "일정 관리",
-          path: "calendar",
-        },
-
-        {
-          name: "뉴웨이브",
-          path: "new-waves",
+          name: "FaQ",
+          path: "faq",
           children: [
             {
-              name: "예술가관리",
+              name: "faq 목록",
               path: "list",
             },
             {
-              name: "신청목록",
-              path: "contact",
+              name: "faq 상세 관리",
+              path: "write",
+              hidden: true,
             },
           ],
         },
@@ -248,7 +195,7 @@ export default {
           autoFocusButton: "ok",
           returnFocus: this.$refs.app,
           hideHeaderClose: false,
-          headerCloseContent: `<i class="icon icon-times text-133"></i>`,
+          headerCloseContent: `<i class="icon icon-times text-133"/>`,
           ...obj,
         };
         const msgVNode =
@@ -286,7 +233,7 @@ export default {
           noCloseOnBackdrop: true,
           autoFocusButton: "ok",
           hideHeaderClose: false,
-          headerCloseContent: `<i class="icon icon-times text-13"></i>`,
+          headerCloseContent: `<i class="icon icon-times text-13"/>`,
           ...obj,
         };
         const msgVNode =
@@ -350,7 +297,7 @@ export default {
     padding: 1rem;
     text-align: center;
     img {
-      max-width: 180px;
+      max-width: 100%;
     }
   }
   .sidebar-body {

@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import { resize, createHash } from "~/plugins/commons.js";
+import { resize } from "~/plugins/commons.js";
 export default {
   props: {
     title: {

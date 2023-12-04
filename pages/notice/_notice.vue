@@ -12,29 +12,31 @@
         </header>
         <section class="news-body">
           <ul>
-            <li class="news-item" v-for="(item, i) in 10" :key="i">
+            <li class="news-item" v-for="(item, i) in notices" :key="i">
               <b-row>
                 <b-col cols="7" lg="8">
                   <header class="d-flex align-items-center">
                     <span class="news-type mr-2">공지</span>
-                    <h6 class="text-truncate px-2">
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Autem deleniti aliquam vitae omnis. Odit, exercitationem
-                      deserunt architecto suscipit similique, sed hic esse fuga
-                      ducimus ullam aliquid quo quisquam illum rerum!
-                    </h6>
+                    <router-link
+                      :to="`/notice/bbs/notice/${item?.id}`"
+                      class="text-truncate px-2 fw-600"
+                    >
+                      {{ item?.title }}
+                    </router-link>
                   </header>
                 </b-col>
                 <b-col cols="3" lg="2">
                   <div class="text-center">
                     <span class="text-13 text-md-15 text-gray-500">
-                      2023.08.18
+                      {{ item?.createdAt }}
                     </span>
                   </div>
                 </b-col>
                 <b-col cols="2" lg="2">
                   <div class="text-center">
-                    <span class="text-13 text-md-15 text-gray-500">10000</span>
+                    <span class="text-13 text-md-15 text-gray-500">
+                      {{ item?.viewer }}
+                    </span>
                   </div>
                 </b-col>
               </b-row>
@@ -47,10 +49,10 @@
     <template v-if="collectionName === 'faq'">
       <section>
         <div class="pb-1 mb-2">
-          <span class="fw-700">총 몇개</span>
+          <span class="fw-700">총 {{ faqs?.length }}개</span>
         </div>
         <ul class="faq-list">
-          <li v-for="(item, i) in 10" :key="i" class="border-bottom">
+          <li v-for="(item, i) in faqs" :key="i" class="border-bottom">
             <header class="py-3">
               <b-btn
                 block
@@ -59,13 +61,9 @@
               >
                 <span class="status mr-3">Q</span>
                 <span
-                  class="fw-700 text-15 text-md-18 text-left text-truncate pt-2 q-title"
+                  class="fw-700 text-15 text-md-18 text-left text-truncate pt-2 q-title ml-0 mr-auto"
                 >
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Excepturi, amet iusto dignissimos hic voluptatem aspernatur,
-                  id doloremque similique odit quasi laudantium sit molestias,
-                  debitis explicabo dolorum enim necessitatibus. Nemo, eos.
-                  <!-- {{ item.title }} -->
+                  {{ item?.title }}
                 </span>
                 <div class="px-4 py-2">
                   <i class="icon icon-down-open text-16 text-md-20" />
@@ -78,11 +76,9 @@
                 <div class="pl-2 d-flex align-items-center">
                   <span class="status mr-3">A</span>
                   <p class="text-15 text-md-18">
-                    <!-- {{ item.content }} -->
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Illum impedit non aspernatur quis error ratione vitae
-                    quisquam labore maiores et a, quasi cum repellat excepturi.
-                    Vero eligendi totam obcaecati quod.
+                    <client-only>
+                      <p v-html="item.content" />
+                    </client-only>
                   </p>
                 </div>
               </div>
@@ -97,10 +93,39 @@
 <script>
 export default {
   layout: "detail",
-
+  data() {
+    return {
+      notices: null,
+      faqs: null,
+    };
+  },
   computed: {
     collectionName() {
       return this.$route.params?.notice;
+    },
+  },
+  watch: {
+    collectionName(n) {
+      this.getNotice(n);
+    },
+  },
+  async mounted() {
+    await this.getNotice(this.collectionName);
+  },
+  methods: {
+    async getNotice(collectionName) {
+      const { getAllBoardItems } = this.$firebase();
+      const items = await getAllBoardItems(
+        collectionName === "news" ? "notice" : "faq",
+        null,
+        null,
+        ["createdAt", "desc"]
+      );
+      if (collectionName === "news") {
+        this.notices = items;
+      } else {
+        this.faqs = items;
+      }
     },
   },
 };

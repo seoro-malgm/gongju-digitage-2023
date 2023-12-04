@@ -53,7 +53,7 @@
       </ul>
       <hr class="mt-5 mb-3 border-gray-500" />
       <div class="text-right text-13 text-lg-14">
-        Copyright&copy; 2023 디지털문화유산전 All rights reserved
+        Copyright&copy; 2023 디지털유산전 All rights reserved
       </div>
       <!-- <nav class="footer-nav"> -->
       <!-- <b-btn variant="link " to="/brand">

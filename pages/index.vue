@@ -154,21 +154,32 @@
               class="d-flex align-items-center justify-content-between pb-2"
             >
               <h5 class="text-20 text-lg-24">새소식</h5>
-              <b-btn variant="link text-gray-600 text-13 text-lg-15"
+              <b-btn
+                variant="link text-gray-600 text-13 text-lg-15"
+                to="/notice/news"
                 >더보기
                 <i class="icon icon-right-open" />
               </b-btn>
             </header>
             <ul class="list-bbs mb-5 mb-lg-0">
-              <b-row tag="li" v-for="(item, i) in 5" :key="i" class="bbs-item">
-                <b-col cols="9" class="text-truncate">
-                  <router-link to="/" class="title">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Obcaecati, ad.
+              <b-row
+                tag="li"
+                v-for="(item, i) in notices"
+                :key="i"
+                class="bbs-item"
+              >
+                <b-col cols="8" class="text-truncate">
+                  <router-link
+                    :to="`/notice/bbs/notice/${item?.id}`"
+                    class="title"
+                  >
+                    {{ item?.title }}
                   </router-link>
                 </b-col>
-                <b-col cols="3" class="text-right">
-                  <span class="text-gray-600 text-13 text-14">2023.10.21</span>
+                <b-col cols="4" class="text-right">
+                  <span class="text-gray-600 text-13 text-14">
+                    {{ item?.createdAt }}
+                  </span>
                 </b-col>
               </b-row>
             </ul>
@@ -178,21 +189,29 @@
               class="d-flex align-items-center justify-content-between pb-2"
             >
               <h5 class="text-20 text-lg-24">FAQ</h5>
-              <b-btn variant="link text-gray-600 text-13 text-lg-15"
+              <b-btn
+                variant="link text-gray-600 text-13 text-lg-15"
+                to="/notice/faq"
                 >더보기
                 <i class="icon icon-right-open" />
               </b-btn>
             </header>
             <ul class="list-bbs mb-5 mb-lg-0">
-              <b-row tag="li" v-for="(item, i) in 5" :key="i" class="bbs-item">
-                <b-col cols="9" class="text-truncate">
-                  <router-link to="/" class="title">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Obcaecati, ad.
+              <b-row
+                tag="li"
+                v-for="(item, i) in faqs"
+                :key="i"
+                class="bbs-item"
+              >
+                <b-col cols="8" class="text-truncate">
+                  <router-link :to="`/notice/faq`" class="title">
+                    {{ item?.title }}
                   </router-link>
                 </b-col>
-                <b-col cols="3" class="text-right">
-                  <span class="text-gray-600 text-13 text-14">2023.10.21</span>
+                <b-col cols="4" class="text-right">
+                  <span class="text-gray-600 text-13 text-14">
+                    {{ item?.createdAt }}
+                  </span>
                 </b-col>
               </b-row>
             </ul>
@@ -265,6 +284,10 @@
         </li>
       </ul>
     </section>
+    <!-- 팝업 -->
+    <template v-if="popup?.show">
+      <popup-image :item="popup" />
+    </template>
   </div>
 </template>
 
@@ -278,22 +301,25 @@ export default {
   props: {
     auth: {
       type: [String, Boolean],
-      default: false,
+      default: false
     },
     scrollY: {
       type: [String, Number],
-      default: 0,
+      default: 0
     },
     onScrolled: {
       type: Boolean,
-      default: false,
-    },
+      default: false
+    }
   },
   data() {
     return {
       programIndex: 0,
       snsTabIndex: 0,
       archives,
+      notices: null,
+      faqs: null,
+      popup: null
     };
   },
   computed: {
@@ -314,8 +340,41 @@ export default {
         }
       }
       return result;
-    },
+    }
   },
+  async mounted() {
+    await this.getPopup();
+    await this.getNotices();
+    await this.getFaqs();
+  },
+  methods: {
+    async getPopup() {
+      try {
+        const { getBoardItem } = this.$firebase();
+        const data = await getBoardItem("popup-image", ["no", "1"]);
+        if (data) {
+          this.popup = data;
+          console.log("data:", data);
+        }
+      } catch (error) {
+        console.error("error:", error);
+      }
+    },
+    async getNotices() {
+      const { getAllBoardItems } = this.$firebase();
+      this.notices = await getAllBoardItems("notice", null, null, [
+        "createdAt",
+        "desc"
+      ]);
+    },
+    async getFaqs() {
+      const { getAllBoardItems } = this.$firebase();
+      this.faqs = await getAllBoardItems("faq", null, null, [
+        "createdAt",
+        "desc"
+      ]);
+    }
+  }
 };
 </script>
 

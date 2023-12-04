@@ -9,7 +9,7 @@ export const state = () => ({
     {
       key: "name",
       name: "행사명",
-      value: "2023 디지털문화유산전",
+      value: "2023 디지털유산전",
     },
     {
       key: "startDate",
